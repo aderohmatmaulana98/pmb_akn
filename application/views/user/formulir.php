@@ -156,10 +156,13 @@
                 <h1 id="register">Form Pendaftaran</h1>
                 <div class="all-steps" id="all-steps"> <span class="step"></span> <span class="step"></span> <span class="step"></span></div>
                 <div class="tab">
+                    <label for="">Nama Lengkap</label>
                     <p><input type="text" placeholder="Nama Lengkap" oninput="this.className = ''" name="nama_lengkap"></p>
+                    <label for="">Tempat Lahir</label>
                     <p><input type="text" placeholder="Tempat Lahir" oninput="this.className = ''" name="tempat_lahir"></p>
+                    <label for="">Tanggal Lahir</label>
                     <p><input type="date" placeholder="Tanggal Lahir" oninput="this.className = ''" name="tgl_lahir"></p>
-
+                    <label for="">Jenis Kelamin</label>
                     <p>
                         <select name="jenis_kelamin" oninput="this.className = ''" required>
                             <option value="" selected disabled>Pilih Jenis Kelamin</option>
@@ -174,6 +177,7 @@
                             <?php endforeach; ?>
                         </select>
                     </p>
+                    <label for="">Agama</label>
                     <p>
                         <select name="agama" oninput="this.className = ''" required>
                             <option value="" selected disabled>Pilih Agama</option>
@@ -185,9 +189,11 @@
                             <option value="Kong Hu Cu">Kong Hu Cu</option>
                         </select>
                     </p>
+                    <label for="">No Handphone</label>
                     <p><input type="number" placeholder="No Handphone" oninput="this.className = ''" name="no_hp"></p>
                 </div>
                 <div class="tab">
+                <label for="">Provinsi</label>
                     <p>
                         <select name="provinsi" id="provinsi" oninput="this.className = ''" required>
                             <option value="" selected disabled>Pilih Provinsi</option>
@@ -196,17 +202,21 @@
                             <?php endforeach; ?>
                         </select>
                     </p>
+                    <label for="">Kabupaten</label>
                     <p>
                         <select name="kabupaten" id="kabupaten" oninput="this.className = ''" required>
                             <option value="" selected disabled>Pilih Kabupaten</option>
                         </select>
                     </p>
+                    <label for="">Kecamatan</label>
                     <p>
                         <select name="kecamatan" id="kecamatan" oninput="this.className = ''" required>
                             <option value="" selected disabled>Pilih Kecamatan</option>
                         </select>
                     </p>
+                    <label for="">Alamat</label>
                     <p><input type="text" placeholder="Alamat" oninput="this.className = ''" name="alamat"></p>
+                    <label for="">Prodi Pilihan</label>
                     <p>
                         <select name="prodi" oninput="this.className = ''" required>
                             <option value="" selected disabled>Pilih Prodi</option>
@@ -215,33 +225,55 @@
                             <option value="3">Kriya Kulit</option>
                         </select>
                     </p>
-
-                    <p><input type="number" placeholder="Tahun Lulus" oninput="this.className = ''" name="tahun_lulus">
+                    <label for="">Tahun Lulus</label>
+                    <?php $years = range(1900, strftime("%Y", time())); ?>
+                    <p>
+                        <?php foreach($years as $year) ?>
+                        <select oninput="this.className = ''" name="tahun_lulus">
+                            <option selected disabled>Pilih Tahun Lulus</option>
+                            <?php foreach($years as $year) : ?>
+                                <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </p>
+                    <label for="">Asal Sekolah</label>
                     <p><input placeholder="Asal Sekolah" oninput="this.className = ''" name="asal_sekolah"></p>
+                    <label for="">Nama Orang Tua</label>
                     <p><input placeholder="Nama Orang Tua" oninput="this.className = ''" name="nama_ortu"></p>
+                    <label for="">Pekerjaan Orang Tua</label>
                     <p><input placeholder="Pekerjaan Orang Tua" oninput="this.className = ''" name="pekerjaan_ortu"></p>
+                    <label for="">No Handphone Orang Tua</label>
                     <p><input type="number" placeholder="No Handphone Orang Tua" oninput="this.className = ''" name="telepon_ortu"></p>
                 </div>
                 <div class="tab">
                     <p>
-                        <label for="ka">KTP</label>
-                    <p><input type="file" placeholder="Kartu Tanda Penduduk" oninput="this.className = ''" name="ktp"></p>
+                    <label for="ka">KTP</label>
+                    <p>
+                    <input type="file" placeholder="Kartu Tanda Penduduk" oninput="this.className = ''" name="ktp"><br>
+                    <small class="text-danger">*Upload dalam format PDF</small>
+                    </p>
+                    
                     </p>
 
                     <p>
                         <label for="ka">Kartu Keluarga</label>
-                    <p><input type="file" placeholder="Kartu Keluarga" oninput="this.className = ''" name="kk">
+                    <p><input type="file" placeholder="Kartu Keluarga" oninput="this.className = ''" name="kk"><br>
+                    <small class="text-danger">*Upload dalam format PDF</small>
                     </p>
                     </p>
 
                     <p>
                         <label for="ka">Ijazah/SKL</label>
-                    <p><input type="file" placeholder="Ijazah" oninput="this.className = ''" name="ijazah"></p>
+                    <p><input type="file" placeholder="Ijazah" oninput="this.className = ''" name="ijazah"><br>
+                    <small class="text-danger">*Upload dalam format PDF</small>
+                </p>
+                    
                     </p>
                     <p>
                         <label for="ka">Pas Foto</label>
-                    <p><input type="file" placeholder="Pas Foto" oninput="this.className = ''" name="pas_foto"></p>
+                    <p><input type="file" placeholder="Pas Foto" oninput="this.className = ''" name="pas_foto"><br>
+                    <small class="text-danger">*Upload dalam format JPG/JPEG/PNG</small>
+                </p>
                     </p>
                 </div>
                 <!-- <div class="thanks-message text-center" id="text-message"> <img src="https://i.imgur.com/O18mJ1K.png" width="100" class="mb-4">

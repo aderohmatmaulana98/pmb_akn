@@ -69,23 +69,24 @@ class User extends CI_Controller
         $id_user = $data['user']['id'];
         $this->load->library('dompdf_gen');
         $sql = "SELECT pendaftar.`no_pendaftaran`, pendaftar.`nama_lengkap`, pendaftar.`tempat_lahir`, pendaftar.`tanggal_lahir`, pendaftar.`jenis_kelamin`, prodi.nama_prodi, prodi.ruangan_praktek, prodi.ruangan_wawancara, jadwal.`tgl_test`, pendaftar.pas_foto
-        FROM USER, pendaftar, jadwal, prodi
+        FROM user, pendaftar, jadwal, prodi
         WHERE user.`id` = pendaftar.`id_user_calon_mhs`
         AND jadwal.`id` = pendaftar.`id_jadwal`
         AND prodi.id = pendaftar.`id_prodi`
         AND user.`id` = $id_user";
         $data['kartu_test'] = $this->db->query($sql)->row_array();
+        $data['foto'] = $data['kartu_test']['pas_foto'];
+        // $this->qrcode($data['foto']);
         $this->load->view('user/kartu_test', $data);
+        // $paper_size = 'A4';
+        // $orientation = 'potrait';
 
-        $paper_size = 'A4';
-        $orientation = 'potrait';
+        // $html = $this->output->get_output();
+        // $this->dompdf->set_paper($paper_size, $orientation);
 
-        $html = $this->output->get_output();
-        $this->dompdf->set_paper($paper_size, $orientation);
-
-        $this->dompdf->load_html($html);
-        $this->dompdf->render();
-        $this->dompdf->stream('kartu test.pdf', array('Attachment' => 0));
+        // $this->dompdf->load_html($html);
+        // $this->dompdf->render();
+        // $this->dompdf->stream('kartu test.pdf', array('Attachment' => 0));
     }
     public function biodata()
     {
@@ -282,6 +283,7 @@ class User extends CI_Controller
                 $id_jadwal += 1;
             }
         }
+        
 
         $sql4 = "UPDATE pendaftar , user 
                     SET pendaftar.id_jadwal = $id_jadwal 
@@ -291,10 +293,39 @@ class User extends CI_Controller
         $this->db->query($sql4);
 
         $sql = "UPDATE user SET user.cek_isi = 1 WHERE user.id = $id_user_calon_mhs";
+        
         $this->db->query($sql);
+
+        $sql6 = "SELECT pendaftar.pas_foto FROM pendaftar WHERE pendaftar.id_user_calon_mhs = $id_user_calon_mhs";
+
+        $foto = $this->db->query($sql6)->row_array();
+        $foto = base_url('assets/img/pas_foto/'). $foto['pas_foto'];
+
+        $this->generate_qrcode($foto,$no_daftar);
+
         $this->_email($nama_lengkap, $email);
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Pendaftaran Berhasil. </div>');
         redirect('user/berhasil_daftar');
+    }
+    public function generate_qrcode($foto,$no_daftar)
+    {
+        $config['cacheable']    = true; //boolean, the default is true
+        $config['cachedir']     = './assets/'; //string, the default is application/cache/
+        $config['errorlog']     = './assets/'; //string, the default is application/logs/
+        $config['imagedir']     = './assets/img/qr_code/'; //direktori penyimpanan qr code
+        $config['quality']      = true; //boolean, the default is true
+        $config['size']         = '1024'; //interger, the default is 1024
+        $config['black']        = array(224,255,255); // array, default is array(255,255,255)
+        $config['white']        = array(70,130,180); // array, default is array(0,0,0)
+        $this->ciqrcode->initialize($config);
+ 
+        $image_name=$no_daftar.'.png'; //buat name dari qr code sesuai dengan nim
+ 
+        $params['data'] = $foto; //data yang akan di jadikan QR CODE
+        $params['level'] = 'H'; //H=High
+        $params['size'] = 10;
+        $params['savename'] = FCPATH.$config['imagedir'].$image_name; //simpan image QR CODE ke folder assets/images/
+        $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
     }
 
     public function _email($nama_lengkap, $email)
@@ -317,8 +348,8 @@ class User extends CI_Controller
 			Selamat anda telah berhasil mendaftar PMB Akademi Komunitas Negeri Seni dan Budaya Yogyakarta<br><br>	
 			Berikutnya silahkan unduh kartu test melalui link dibawah ini: <br><br>
 
-			1. Unduh kartu test <a href="' . base_url() . 'sertifikasi/ujian_bahasa' . '">disini</a><br> 
-			2. Unduh Formulir <a href="' . base_url() . 'sertifikasi/ujian_bahasa' . '">disini</a><br> 
+			1. Unduh kartu test <a href="' . base_url() . 'user/cetak_kartu_test' . '">disini</a><br> 
+			2. Unduh Formulir <a href="' . base_url() . 'user/biodata' . '">disini</a><br> 
 			
 			Terimaksih telah mendaftar penerimaan mahasiswa baru<br><br>
 			-Akademi Komunitas Negeri Seni dan Budaya Yogyakarta');
@@ -428,11 +459,21 @@ class User extends CI_Controller
 
         $role_id = $data['user']['role_id'];
         $cek_isi = $data['user']['cek_isi'];
+        $user_id = $data['user']['id'];
 
         if ($cek_isi == 0 && $role_id == 4) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Isi formulir terlebih dahulu ! </div>');
             redirect('user/formulir');
         }
+
+        $sql = "SELECT user.`id`,user.`nik`, pendaftar.`nama_lengkap`, nilai_test.`praktek`, `nilai_test`.`wawancara`, nilai_test.`skor`, pendaftar.id_pengumuman, prodi.`nama_prodi`
+        FROM USER, pendaftar, nilai_test, prodi
+        WHERE user.`id` = pendaftar.`id_user_calon_mhs`
+        AND pendaftar.`id` = nilai_test.`id_pendaftar`
+        AND pendaftar.`id_prodi` = prodi.`id`
+        AND user.`id` = $user_id";
+
+        $data['pengumuman'] = $this->db->query($sql)->row_array();
 
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar', $data);

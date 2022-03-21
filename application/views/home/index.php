@@ -71,7 +71,15 @@
                 </div>
                 <div class="col-lg-2 col-6">
                     <div class="apldg-header-right">
-                        <a href="<?= base_url('auth/index'); ?>" class="apldg-primary-btn">Login</a>
+                        <?php if($buka == 1) :?>
+                            <a href="<?= base_url('auth/index'); ?>" class="apldg-primary-btn">Login</a>
+                        <?php else : ?>
+                            <a href="#" class="apldg-primary-btn" onclick="Swal.fire(
+                                                                                    'Perhatian !',
+                                                                                    'Pendaftaran Mahasiswa Baru Belum Dibuka.',
+                                                                                    'warning'
+                                                                                    )" id="login">Login</a>
+                        <?php endif; ?>
                         <div class="apldg-mobile-menu-open">
                             <span></span>
                             <span></span>
@@ -109,71 +117,21 @@
     </div>
     <!-- Header Search Form End -->
 
-    <!-- Header Sidebar Info -->
-    <div class="apldg-sidebar-info">
-        <div class="apldg_sidebar_info_content">
-            <span class="close-menu"><i class="fas fa-times"></i></span>
-            <div class="apldg_sidebar_logo">
-                <a href="#"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/logo.png" alt=""></a>
-            </div>
-            <div class="apldg-pera-txt">
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyert et eirmod tempor invidunt ut labore et ert dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et cer justo duo dolores et berr ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor.</p>
-            </div>
-            <div class="apldg-sidebar-gallery">
-                <ul>
-                    <li>
-                        <a href="#"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/gallery/01.png" alt=""></a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/gallery/02.png" alt=""></a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/gallery/03.png" alt=""></a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/gallery/04.png" alt=""></a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/gallery/05.png" alt=""></a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/gallery/06.png" alt=""></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="apldg-sidebar-social">
-                <div class="apldg-headline">
-                    <h5>Follow us on</h5>
-                </div>
-                <div class="apldg-social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-pinterest"></i></a>
-                </div>
-            </div>
-            <div class="apldg-sidebar-copyright">
-                <p>&copy; Copyright By <a href="#">Themexriver</a></p>
-            </div>
-        </div>
-    </div>
-    <!-- Header Sidebar Info End -->
-
     <!-- Hero Slider -->
     <section class="apldg-hero-slider-area" id="home">
-        <span class="apldg-hero-vector-1"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/slider/object-01.png" alt=""></span>
-        <span class="apldg-hero-vector-2"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/slider/object-02.png" alt=""></span>
-        <span class="apldg-hero-vector-3"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/slider/object-03.png" alt=""></span>
-        <span class="apldg-hero-vector-4"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/slider/object-04.png" alt=""></span>
+        <span class="apldg-hero-vector-1"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang.png" alt="" ></span>
+        <span class="apldg-hero-vector-2"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang2.png" alt=""></span>
+        <span class="apldg-hero-vector-3"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/semar.png" alt=""></span>
+        <span class="apldg-hero-vector-4"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang3.png" alt=""></span>
         <div class="apldg-hero-slider">
             <div class="apldg-hero-single-item">
-                <span class="apldg-hero-right-img apldg-responsive-vector-img"><img class="rounded" src="<?= base_url('assets/landing/assets/img/akn/baner1.jpg') ?>" alt=""></span>
+                <span class="apldg-hero-right-img apldg-responsive-vector-img"><img class="rounded" src="<?= base_url('assets/landing/assets/img/akn/baner2.jpg') ?>" alt="banner1"></span>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-7 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
                             <div class="apldg-hero-left">
                                 <div class="apldg-headline">
-                                    <h1>Penerimaan Mahasiswa Baru <span> Akademi Komunitas Negeri Seni Dan Budaya</span> Yogyakarta</h1>
+                                    <h1>SELAMAT DATANG DI <span style="color: orange;">AKADEMI KOMUNITAS NEGERI SENI DAN BUDAYA</span> <br> YOGYAKARTA</h1>
                                 </div>
                                 <!-- <div class="apldg-pera-txt">
                                     <p>labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. <br>commodo viverra maecenas accumsan lacus vel facilisis. </p>
@@ -190,7 +148,7 @@
                         <div class="col-lg-7 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
                             <div class="apldg-hero-left">
                                 <div class="apldg-headline">
-                                    <h1>Penerimaan Mahasiswa Baru <span>Akademi Komunitas Negeri Seni Dan Budaya</span> Yogyakarta</h1>
+                                    <h1>PENERIMAAN MAHASISWA BARU <span>AKADEMI KOMUNITAS NEGERI SENI DAN BUDAYA</span> YOGYAKARTA</h1>
                                 </div>
                                 <!-- <div class="apldg-pera-txt">
                                     <p>labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. <br>commodo viverra maecenas accumsan lacus vel facilisis. </p>
@@ -201,13 +159,13 @@
                 </div>
             </div>
             <div class="apldg-hero-single-item">
-                <span class="apldg-hero-right-img apldg-responsive-vector-img"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/slider/01.png" alt=""></span>
+                <span class="apldg-hero-right-img apldg-responsive-vector-img"><img src="<?= base_url('assets/landing/assets/img/akn/baner2.jpg') ?>" alt=""></span>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-7 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
                             <div class="apldg-hero-left">
                                 <div class="apldg-headline">
-                                    <h1>Penerimaan Mahasiswa Baru <span>Akademi Komunitas Negeri Seni Dan Budaya</span> Yogyakarta</h1>
+                                    <h1>PENERIMAAN MAHASISWA BARU <span>AKADEMI KOMUNITAS NEGERI SENI DAN BUDAYA</span> YOGYAKARTA</h1>
                                 </div>
                             </div>
                         </div>
@@ -219,10 +177,11 @@
     <!-- Hero Slider End -->
 
     <!-- Why Choose Us Section -->
-    <section class="apldg-choose-us" id="prodi">
-        <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/object-5.png" alt=""></span>
-        <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/object-6.png" alt=""></span>
-        <span class="apldg-object-7"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/object-7.png" alt=""></span>
+    
+    <section class="sampeu" id="prodi">
+        <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/bimaun.png" alt=""></span>
+        <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/pandawa1.png" alt=""></span>
+        <span class="apldg-object-7"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/pandawa1.png" alt=""></span>
         <div class="container">
             <div class="text-center">
                 <div class="apldg-choose-right">
@@ -247,7 +206,7 @@
                             <div class="col-sm-4">
                                 <div class="apldg-choose-column">
                                     <div class="apldg-icon-wrapper">
-                                        <img src="<?= base_url('assets/landing/assets/img/akn/seni_tari.png') ?>">
+                                        <img src="<?= base_url('assets/landing/assets/img/akn/tari.jpg') ?>">
                                     </div>
                                     <div class="apldg-headline">
                                         <a href="#">
@@ -262,7 +221,7 @@
                             <div class="col-sm-4">
                                 <div class="apldg-choose-column">
                                     <div class="apldg-icon-wrapper gradient-2">
-                                        <img src="<?= base_url('assets/landing/assets/img/akn/seni_kriya.png') ?>">
+                                        <img src="<?= base_url('assets/landing/assets/img/akn/kriya.jpg') ?>">
                                     </div>
                                     <div class="apldg-headline">
                                         <a href="#">
@@ -298,10 +257,11 @@
     <!-- Choose Us End -->
 
     <!-- Why Choose Us Section -->
-    <section class="apldg-choose-us" id="jadwal_penting">
-        <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/object-5.png" alt=""></span>
-        <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/object-6.png" alt=""></span>
-        <span class="apldg-object-7"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/object-7.png" alt=""></span>
+    <section class="apldg-choose-us">
+    <section  id="jadwal_penting">
+        <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/semar.png" alt=""></span>
+        <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/gareng.png" alt=""></span>
+        <span class="apldg-object-7"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/petruk.png" alt=""></span>
         <div class="container">
             <div class="text-center">
                 <div class="apldg-choose-right">
@@ -322,11 +282,11 @@
             <div class="row align-items-center">
                 <div class="col-lg-12 order-12 order-lg-1">
                     <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right col-lg-8" style="background-color: blueviolet;">
+                        <div class="card-header border-bottom-warning text-right col-lg-8" style="background-color: orange;">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right" style="background-color: blueviolet;">
+                        <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
                         </div>
                         <div class="card shadow col-lg-6">
                             <div class="card-body">
@@ -358,11 +318,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-header border-bottom-warning text-right" style="background-color: blueviolet;">
+                        <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right col-lg-8" style="background-color: blueviolet;">
+                        <div class="card-header border-bottom-warning text-right col-lg-8" style="background-color: orange;">
                         </div>
                     </div>
                 </div>
@@ -371,10 +331,10 @@
     </section>
     <!-- Choose Us End -->
 
-    <section class="apldg-choose-us" id="kontak">
-        <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/object-5.png" alt=""></span>
-        <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/object-6.png" alt=""></span>
-        <span class="apldg-object-7"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/object-7.png" alt=""></span>
+    <section style="margin-top: 10%;" id="kontak">
+        <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/pandawa2.png" alt=""></span>
+        <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang.png" alt=""></span>
+        <span class="apldg-object-7"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang2.png" alt=""></span>
         <div class="container">
             <div class="text-center">
                 <div class="apldg-choose-right">
@@ -395,11 +355,11 @@
             <div class="row align-items-center d-flex justify-content-center">
                 <div class="col-lg-10 order-12 order-lg-1">
                     <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: blueviolet;">
+                        <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: orange;">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right" style="background-color: blueviolet;">
+                        <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
                         </div>
                         <div class="card shadow-lg col-lg-10 px-5 py-3">
                             <p>Anda dapat menghubungi panitia PMB Berikut ini : </p>
@@ -436,22 +396,25 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-header border-bottom-warning text-right" style="background-color: blueviolet;">
+                        <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: blueviolet;">
+                        <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: orange;">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <section class="apldg-choose-us" id="alur">
-        <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/object-5.png" alt=""></span>
-        <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/object-6.png" alt=""></span>
-        <span class="apldg-object-7"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/object-7.png" alt=""></span>
+    </section>
+    
+    <section class="">
+    <section class="sampeu" id="alur">
+        <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang3.png" alt=""></span>
+        <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang.png" alt=""></span>
+        <span class="apldg-object-7"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/semar.png" alt=""></span>
+        <span><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/gunungan.png" style="width: 500px; height: 765px; position: absolute; right: 0; z-index: -1;"></span>
         <div class="container">
             <div class="text-center">
                 <div class="apldg-choose-right">
@@ -472,11 +435,11 @@
             <div class="row align-items-center d-flex justify-content-center">
                 <div class="col-lg-10 order-12 order-lg-1">
                     <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: blueviolet;">
+                        <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: orange;">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right" style="background-color: blueviolet;">
+                        <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
                         </div>
                         <div class="card shadow-lg col-lg-10 px-5 py-3">
                             <p><B>Akademi Komunitas Negeri Seni dan Budaya Yogyakarta tidak memungut biaya pendaftaran pada tahun akademik 2021/2022.</B></p>
@@ -496,11 +459,11 @@
                             </div>
                             <p><b>Untuk informasi lebih lengkap bisa download file di</b> <a class="text-primary" href="https://aknyogya.ac.id/download/get_file/9">DOWNLOAD FILE</a></p>
                         </div>
-                        <div class="card-header border-bottom-warning text-right" style="background-color: blueviolet;">
+                        <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: blueviolet;">
+                        <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: orange;">
                         </div>
                     </div>
                 </div>
@@ -510,9 +473,9 @@
 
     <!-- Testimonial Section -->
     <section class="apldg-testimonial-section">
-        <span class="apldg-object-16"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/slider/object-02.png" alt=""></span>
-        <span class="apldg-object-17"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/object-11.png" alt=""></span>
-        <span class="apldg-circle-shape"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/circle-shape.png" alt=""></span>
+        <span class="apldg-object-16"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/slider/gareng.png" alt=""></span>
+        <span class="apldg-object-17"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang2.png" alt=""></span>
+        <span class="apldg-circle-shape"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/petruk.png" alt=""></span>
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -529,18 +492,15 @@
                     <div class="apldg-feedback-slider">
                         <div class="apldg-feedback-single">
                             <div class="apldg-img-wrapper">
-                                <img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/client-1.jpg" alt="">
-                                <div class="apldg-star-rating">
-                                    <span><i class="fas fa-star"></i>4.5</span>
-                                </div>
+                                <img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/client-1.jpg" alt="">                                
                             </div>
                             <div class="apldg-feedback-content">
                                 <div class="apldg-pera-txt">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                                 </div>
                                 <div class="apldg-clients-info apldg-headline">
-                                    <h5>Jhon Smith</h5>
-                                    <span class="designation">UI/UX Designer</span>
+                                    <h5>Jumat Legen</h5>
+                                    <span class="designation">Acara rutinan setiap bulan</span>
                                 </div>
                             </div>
                         </div>
@@ -584,6 +544,7 @@
 
         </div>
     </section>
+    </section>
     <!-- Testimonial Section End -->
 
     <!-- Footer Section -->
@@ -610,7 +571,7 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="apldg-footer-widget">
                         <div class="apldg-headline">
-                            <h6>Contact Us</h6>
+                            <h6>Hubungi Kami</h6>
                         </div>
                         <div class="apldg-footer-address">
                             <ul>
@@ -633,35 +594,10 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="apldg-footer-widget">
                         <div class="apldg-headline">
-                            <h6>Instagram Gallery</h6>
+                            <h6>Peta Lokasi</h6>
                         </div>
                         <div class="apldg-footer-gallery">
-                            <ul>
-                                <li>
-                                    <img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/f1.jpg" alt="">
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/f2.jpg" alt="">
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/f3.jpg" alt="">
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/f1.jpg" alt="">
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/f2.jpg" alt="">
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/f3.jpg" alt="">
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </li>
-                            </ul>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.4964673133286!2d110.35969181372684!3d-7.842992394348865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a564ea4260f97%3A0x89a93db937c4021a!2sAkademi%20Komunitas%20Negeri%20Seni%20Dan%20Budaya%20Yogyakarta!5e0!3m2!1sid!2sid!4v1646893580583!5m2!1sid!2sid" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>
@@ -691,6 +627,7 @@
     <script src="<?= base_url('assets/landing/') ?>assets/js/rs6.min.js"></script>
     <script src="<?= base_url('assets/landing/') ?>assets/js/side-demo.js"></script>
     <script src="<?= base_url('assets/landing/') ?>assets/js/digital-agency-3.js"></script>
+    <script src="<?= base_url('assets/landing/sweetalert/sweetalert2.all.min.js') ?>"></script>
 
 
 </body>

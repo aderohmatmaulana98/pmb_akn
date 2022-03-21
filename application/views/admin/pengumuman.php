@@ -20,11 +20,12 @@
                                     <option value="<?= $ta['id']; ?>"><?= $ta['tahun_ajaran']; ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <?= form_error('th_ajaran', '<small class="text-danger pl-3">', '</small>'); ?>
                             <button type="submit" class="btn btn-primary"><i data-feather="printer" width="20"></i>Cek Penilaian</button>
                         </div>
                     </form>
                 </div>
+                <div class="table-responsive">
+ 
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -54,22 +55,36 @@
                             <?php $i++;
                             endforeach; ?>
                     </tbody>
-                </table>
+                </table>               
+                </div>
             </div>
             <div class="card shadow col-lg-3 mt-2 p-3">
                 <div>
                     <h4>Atur form dibawah ini untuk terbitkan pengumuman :</h4>
-                    <form class="mt-3">
+                    <form action="<?= base_url('admin/terbit_pengumuman') ?>" method="POST" class="mt-3">
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Tahun Ajawan</label>
-                            <select class="form-select" name="tahun_ajaran">
-                                <option selected disabled>Pilih tahun Ajaran</option>
+                            <label for="tahun_ajaran" class="form-label">Tahun Ajaran</label>
+                            <select class="form-select" name="tahun_ajaran" required>
+                                <option value="" selected disabled>Pilih tahun Ajaran</option>
                                 <?php foreach ($th_ajaran as $ta) : ?>
                                     <option value="<?= $ta['id']; ?>"><?= $ta['tahun_ajaran']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="mb-3">
+                            <label for="tahun_ajaran" class="form-label">Prodi</label>
+                            <select class="form-select" name="prodi" required>
+                                <option value="" selected disabled>Pilih prodi</option>
+                                <?php foreach ($prodi as $pr) : ?>
+                                    <option value="<?= $pr['id']; ?>"><?= $pr['nama_prodi']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="tahun_ajaran" class="form-label">Mahasiswa yang diterima</label>
+                            <input type="number" name="jumlah" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
                     </form>
                 </div>
             </div>

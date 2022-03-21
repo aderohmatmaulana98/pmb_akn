@@ -35,6 +35,7 @@
                     </div>
 
                 </div>
+                <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -83,7 +84,8 @@
                         <?php $i++;
                         endforeach; ?>
                     </tbody>
-                </table>
+                </table>  
+                </div>
             </div>
         </div>
     </section>

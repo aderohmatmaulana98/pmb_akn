@@ -326,7 +326,7 @@ select:visited {
 
 .apldg-title-area .apldg-subtitle {
   display: inline-block;
-  color: #7450f7;
+  color: #eca622;
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 15px;
@@ -347,9 +347,9 @@ select:visited {
 a.apldg-primary-btn {
   width: 138px;
   height: 45px;
-  background-image: -webkit-linear-gradient(160deg, #5754f9 0%, #e23ff0 99%);
-  background-image: -o-linear-gradient(160deg, #5754f9 0%, #e23ff0 99%);
-  background-image: linear-gradient(290deg, #5754f9 0%, #e23ff0 99%);
+  background-image: -webkit-linear-gradient(160deg, #f99054 0%, #000053 99%);
+  background-image: -o-linear-gradient(160deg, #f99054 0%, #000053 99%);
+  background-image: linear-gradient(290deg, #f99054 0%, #000053 99%);
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -1171,7 +1171,7 @@ a.apldg-primary-btn:hover::before {
 .apldg-hero-slider-area .apldg-hero-slider .apldg-hero-single-item .apldg-hero-right-img {
   position: absolute;
   right: 0;
-  top: 50%;
+  top: 45%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
@@ -1187,11 +1187,11 @@ a.apldg-primary-btn:hover::before {
 }
 
 .apldg-hero-slider-area .apldg-hero-slider .apldg-hero-single-item .apldg-hero-left {
-  padding-right: 30px;
+  padding-right: 70px;
 }
 
 .apldg-hero-slider-area .apldg-hero-slider .apldg-hero-single-item .apldg-hero-left h1 span {
-  color: #7450f7;
+  color: #f7bd50;
 }
 
 .apldg-hero-slider-area .apldg-hero-slider .apldg-hero-single-item .apldg-hero-left .apldg-pera-txt {
@@ -1322,7 +1322,7 @@ a.apldg-primary-btn:hover::before {
 .apldg-hero-slider-area .apldg-hero-slider .slick-dots li button {
   font-size: 18px;
   text-indent: initial;
-  color: #000053;
+  color: #f8c024;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   -webkit-transition: all 0.3s ease-in;
@@ -1422,15 +1422,27 @@ a.apldg-primary-btn:hover::before {
 }
 
 .apldg-choose-us {
-  padding: 100px 0;
+  padding: 80px 0;
+  position: relative;
+}
+.sampeu {
+  padding: 80px 0;
   position: relative;
 }
 
 .apldg-choose-us::before {
+  content: url(../img/d-agency2/gunungan.png);
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  z-index: -1;
+}
+
+.sampeu::before {
   content: url(../img/d-agency2/shape-1.png);
   position: absolute;
-  top: 0;
-  left: 0;
+  width: 50px;
+  height: 50px;
   z-index: -1;
 }
 
@@ -1438,11 +1450,25 @@ a.apldg-primary-btn:hover::before {
 .apldg-choose-us .apldg-object-6,
 .apldg-choose-us .apldg-object-7 {
   position: absolute;
-  width: 20px;
+  width: 80px;
+  display: inline-block;
+}
+.sampeu .apldg-object-5,
+.sampeu .apldg-object-6,
+.sampeu .apldg-object-7 {
+  position: absolute;
+  width: 80px;
   display: inline-block;
 }
 
 .apldg-choose-us .apldg-object-5 {
+  right: 200px;
+  top: 0;
+  -webkit-animation: 30s apldg_move_animation linear infinite;
+  animation: 30s apldg_move_animation linear infinite;
+}
+
+.sampeu .apldg-object-5 {
   right: 200px;
   top: 0;
   -webkit-animation: 30s apldg_move_animation linear infinite;
@@ -1455,6 +1481,12 @@ a.apldg-primary-btn:hover::before {
   -webkit-animation: 30s apldg_move_animation linear infinite;
   animation: 30s apldg_move_animation linear infinite;
 }
+.sampeu .apldg-object-6 {
+  bottom: 200px;
+  left: 100px;
+  -webkit-animation: 30s apldg_move_animation linear infinite;
+  animation: 30s apldg_move_animation linear infinite;
+}
 
 .apldg-choose-us .apldg-object-7 {
   bottom: 100px;
@@ -1462,8 +1494,21 @@ a.apldg-primary-btn:hover::before {
   -webkit-animation: 30s apldg_move_animation linear infinite;
   animation: 30s apldg_move_animation linear infinite;
 }
+.sampeu .apldg-object-7 {
+  bottom: 100px;
+  right: 300px;
+  -webkit-animation: 30s apldg_move_animation linear infinite;
+  animation: 30s apldg_move_animation linear infinite;
+}
 
 .apldg-choose-us .apldg-choose-left .apldg-choose-column {
+  background-color: #ffffff;
+  -webkit-box-shadow: 0px 15px 40px 0px rgba(166, 166, 166, 0.1);
+  box-shadow: 0px 15px 40px 0px rgba(166, 166, 166, 0.1);
+  padding: 30px 20px;
+  margin-bottom: 30px;
+}
+.sampeu .apldg-choose-left .apldg-choose-column {
   background-color: #ffffff;
   -webkit-box-shadow: 0px 15px 40px 0px rgba(166, 166, 166, 0.1);
   box-shadow: 0px 15px 40px 0px rgba(166, 166, 166, 0.1);
@@ -1491,8 +1536,34 @@ a.apldg-primary-btn:hover::before {
   font-size: 30px;
   border-radius: 4px;
 }
+.sampeu .apldg-choose-left .apldg-choose-column .apldg-icon-wrapper i {
+  width: 60px;
+  height: 60px;
+  background-image: -webkit-gradient(linear, left top, right top, from(#4188ee), to(#66e4de));
+  background-image: -webkit-linear-gradient(left, #4188ee 0%, #66e4de 100%);
+  background-image: -o-linear-gradient(left, #4188ee 0%, #66e4de 100%);
+  background-image: linear-gradient(90deg, #4188ee 0%, #66e4de 100%);
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 30px;
+  border-radius: 4px;
+}
 
 .apldg-choose-us .apldg-choose-left .apldg-choose-column .apldg-icon-wrapper.gradient-2 i {
+  background-image: -webkit-gradient(linear, left top, right top, from(#ff539f), to(#ff7875));
+  background-image: -webkit-linear-gradient(left, #ff539f 0%, #ff7875 100%);
+  background-image: -o-linear-gradient(left, #ff539f 0%, #ff7875 100%);
+  background-image: linear-gradient(90deg, #ff539f 0%, #ff7875 100%);
+}
+.sampeu .apldg-choose-left .apldg-choose-column .apldg-icon-wrapper.gradient-2 i {
   background-image: -webkit-gradient(linear, left top, right top, from(#ff539f), to(#ff7875));
   background-image: -webkit-linear-gradient(left, #ff539f 0%, #ff7875 100%);
   background-image: -o-linear-gradient(left, #ff539f 0%, #ff7875 100%);
@@ -1504,8 +1575,18 @@ a.apldg-primary-btn:hover::before {
   background-image: -o-linear-gradient(313deg, #fd5900 0%, #ffcd00 99%);
   background-image: linear-gradient(137deg, #fd5900 0%, #ffcd00 99%);
 }
+.sampeu .apldg-choose-left .apldg-choose-column .apldg-icon-wrapper.gradient-3 i {
+  background-image: -webkit-linear-gradient(313deg, #fd5900 0%, #ffcd00 99%);
+  background-image: -o-linear-gradient(313deg, #fd5900 0%, #ffcd00 99%);
+  background-image: linear-gradient(137deg, #fd5900 0%, #ffcd00 99%);
+}
 
 .apldg-choose-us .apldg-choose-left .apldg-choose-column .apldg-icon-wrapper.gradient-4 i {
+  background-image: -webkit-linear-gradient(313deg, #5754f9 0%, #e23ff0 99%);
+  background-image: -o-linear-gradient(313deg, #5754f9 0%, #e23ff0 99%);
+  background-image: linear-gradient(137deg, #5754f9 0%, #e23ff0 99%);
+}
+.sampeu .apldg-choose-left .apldg-choose-column .apldg-icon-wrapper.gradient-4 i {
   background-image: -webkit-linear-gradient(313deg, #5754f9 0%, #e23ff0 99%);
   background-image: -o-linear-gradient(313deg, #5754f9 0%, #e23ff0 99%);
   background-image: linear-gradient(137deg, #5754f9 0%, #e23ff0 99%);
@@ -1514,12 +1595,21 @@ a.apldg-primary-btn:hover::before {
 .apldg-choose-us .apldg-choose-left .apldg-choose-column .apldg-headline {
   margin-top: 25px;
 }
+.sampeu .apldg-choose-left .apldg-choose-column .apldg-headline {
+  margin-top: 25px;
+}
 
 .apldg-choose-us .apldg-choose-left .apldg-choose-column .apldg-headline h6 {
   font-weight: 600;
 }
+.sampeu .apldg-choose-left .apldg-choose-column .apldg-headline h6 {
+  font-weight: 600;
+}
 
 .apldg-choose-us .apldg-choose-left .apldg-choose-column .apldg-pera-txt {
+  margin-top: 15px;
+}
+.sampeu .apldg-choose-left .apldg-choose-column .apldg-pera-txt {
   margin-top: 15px;
 }
 
@@ -1527,9 +1617,18 @@ a.apldg-primary-btn:hover::before {
   -webkit-animation: 0.3s apldg_ZoomInZoomOut linear;
   animation: 0.3s apldg_ZoomInZoomOut linear;
 }
+.sampeu .apldg-choose-left .apldg-choose-column:hover .apldg-icon-wrapper i {
+  -webkit-animation: 0.3s apldg_ZoomInZoomOut linear;
+  animation: 0.3s apldg_ZoomInZoomOut linear;
+}
 
 @media (max-width: 991.98px) {
   .apldg-choose-us .apldg-choose-left {
+    margin-top: 60px;
+  }
+}
+@media (max-width: 991.98px) {
+  .sampeu .apldg-choose-left {
     margin-top: 60px;
   }
 }

@@ -10,6 +10,9 @@
                 </div>
                 <div class="card-body">
                     <?= $this->session->flashdata('message');  ?>
+
+                    <div class="table-responsive">
+                        
                     <table class="table table-bordered">
                         <?php foreach ($formulir as $f) ?>
                         <tr>
@@ -120,6 +123,8 @@
                         </tr>
 
                     </table>
+                    
+                    </div>
                 </div>
             </div>
         </div>

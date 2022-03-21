@@ -21,7 +21,7 @@
             width: calc(100% - 200px);
         }
     </style>
-    <title>Kartu_ujian</title>
+    <title>Kartu Test</title>
 </head><body class="col-lg-7">
     <div class="mt-4 ">
         <table class="tepi" width="600px" >
@@ -44,7 +44,7 @@
 
 
         </table>
-        <table border="2" class="tepi" width="600px">
+        <table border="2" class="tepi" width="600px" >
             <tr>
                 <td>
                     <div style="text-align: left;" class="ml-3">
@@ -53,18 +53,16 @@
                         </div>
                         <div style="line-height: 25px;">
                             <table style="margin-left: 25px;">
-                                <tr border="0">
+                                <tr border="0" >
 
                                     <td style="font-size: 9pt; border: 0px;"><b>No pendaftaran</b></td>
                                     <td style="font-size: 9pt; border: 0px;">:</td>
                                     <td style="font-size: 9pt; border: 0px;"><?= $kartu_test['no_pendaftaran']; ?></td>
-                                    <td width="160px" style="width: 200; border: 0px;"></td>
-                                    <td rowspan="4" style="padding-right: 7px; border: 0px; ">
-                                        <div class="ml-5" width="500px" style="margin-left: 100px; ">
-                                            <span class="border-4">
-                                                <img src="<?= base_url('assets/img/pas_foto/') . $kartu_test['pas_foto']; ?>" class="border border-dark" align="right" height="90px" width="70px">
-                                            </span>
-                                        </div>
+                                    <td rowspan="4" width="110px" align="right" >
+                                        <img src="<?= base_url('assets/img/pas_foto/') . $kartu_test['pas_foto']; ?>" class="border border-dark" height="90px" width="70px">       
+                                    </td>
+                                    <td rowspan="5"  style="padding-left: 10px;"> 
+                                        <img src="<?= base_url('assets/img/qr_code/') . $kartu_test['no_pendaftaran'].'.png'; ?>" class="border border-dark" align="right" height="170px" width="170px">
                                     </td>
                                 </tr>
                                 <tr style="border: 0px;">
@@ -181,4 +179,7 @@
             </tr>
         </table>
     </div>
+    <script>
+        window.print();
+    </script>
 </body></html>

@@ -6,6 +6,9 @@ class Home extends CI_Controller
 
     public function index()
     {
-        $this->load->view('home/index');
+        $data['buka'] = $this->db->get('pmb')->row_array();
+        $data['buka'] = $data['buka']['buka'];
+        
+        $this->load->view('home/index', $data);
     }
 }

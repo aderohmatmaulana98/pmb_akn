@@ -3,13 +3,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Penyeleksi extends CI_Controller
 {
-
     public function index()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Data Jurusan';
+        $data['prodi'] = $this->db->get('prodi')->result_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('penyeleksi/index', $data);
+        $this->load->view('template/footer');
+
+    }
+
+    public function detail($id)
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Data Calon Mahasiswa';
 
-        $sql = "SELECT pendaftar.id, pendaftar.`no_pendaftaran`, user.`nik`, pendaftar.`nama_lengkap`, prodi.`nama_prodi`, nilai_test.praktek, nilai_test.wawancara, nilai_test.skor, th_ajaran.tahun_ajaran
+        $sql = "SELECT pendaftar.id, pendaftar.`no_pendaftaran`, user.`nik`, pendaftar.`nama_lengkap`, prodi.`nama_prodi`, nilai_test.praktek, nilai_test.wawancara, nilai_test.skor, th_ajaran.tahun_ajaran, pendaftar.id_prodi
         FROM nilai_test
         RIGHT JOIN pendaftar
         ON pendaftar.`id` = nilai_test.id_pendaftar
@@ -19,15 +32,17 @@ class Penyeleksi extends CI_Controller
         ON pendaftar.`id_prodi` = prodi.`id`
         INNER JOIN th_ajaran 
         ON pendaftar.id_th_ajaran = th_ajaran.id
+        WHERE prodi.`id` = $id
         ";
 
         $data['tahun_ajaran'] = $this->db->get('th_ajaran')->result_array();
+        $data['prodi'] = $this->db->get('prodi')->result_array();
         $data['data_calon_mahasiswa'] = $this->db->query($sql)->result_array();
 
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar', $data);
         $this->load->view('template/topbar', $data);
-        $this->load->view('penyeleksi/index', $data);
+        $this->load->view('penyeleksi/detail', $data);
         $this->load->view('template/footer');
     }
 
@@ -37,6 +52,7 @@ class Penyeleksi extends CI_Controller
         $data['title'] = 'Data Calon Mahasiswa';
 
         $th_ajaran = $this->input->post('th_ajaran');
+        $id_prodi = $this->input->post('prodi');
 
         $this->load->library('dompdf_gen');
         $sql = "SELECT pendaftar.`no_pendaftaran`, user.`nik`, pendaftar.`nama_lengkap`, prodi.`nama_prodi`, nilai_test.praktek, nilai_test.wawancara, nilai_test.skor, pendaftar.id_th_ajaran, th_ajaran.tahun_ajaran
@@ -51,6 +67,7 @@ class Penyeleksi extends CI_Controller
         ON pendaftar.`id_th_ajaran` = th_ajaran.id
         WHERE nilai_test.skor IS NULL
         AND pendaftar.id_th_ajaran = $th_ajaran
+        AND pendaftar.`id_prodi` = $id_prodi
         ";
 
         $data['data_calon_mahasiswa'] = $this->db->query($sql)->result_array();
@@ -68,7 +85,7 @@ class Penyeleksi extends CI_Controller
         $this->dompdf->stream('checklist nilai calon mahasiswa.pdf', array('Attachment' => 0));
     }
 
-    public function input_nilai()
+    public function input_nilai($id_prodi)
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
@@ -112,6 +129,6 @@ class Penyeleksi extends CI_Controller
 			Nilai berhasil diinput.
 		  </div>');
 
-        redirect('penyeleksi/index');
+        redirect('penyeleksi/detail/'.$id_prodi);
     }
 }

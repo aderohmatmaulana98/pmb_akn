@@ -1,4 +1,7 @@
 <?php
+
+use phpDocumentor\Reflection\Types\This;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
@@ -15,12 +18,72 @@ class Admin extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Dashboard';
+        $data['pmb'] = $this->db->get('pmb')->row_array();
+        $data['pmb'] = $data['pmb']['buka'];
+
+
+        $sql = "SELECT count(id) as jumlah FROM pendaftar";
+
+        $data['pendaftar'] = $this->db->query($sql)->row_array();
+        $data['pendaftar'] = $data['pendaftar']['jumlah'];
+
+        $sql1 = "SELECT count(user.`id`) as jumlah
+        FROM user, pendaftar, nilai_test, prodi
+        WHERE user.`id` = pendaftar.`id_user_calon_mhs`
+        AND pendaftar.`id` = nilai_test.`id_pendaftar`
+        AND pendaftar.`id_prodi` = prodi.`id`
+        AND pendaftar.`id_pengumuman` = 1";
+
+        $data['diterima'] = $this->db->query($sql1)->row_array();        
+        $data['diterima'] = $data['diterima']['jumlah'];   
+
+        $sql2 = "SELECT count(user.`id`) as jumlah
+        FROM user, pendaftar, nilai_test, prodi
+        WHERE user.`id` = pendaftar.`id_user_calon_mhs`
+        AND pendaftar.`id` = nilai_test.`id_pendaftar`
+        AND pendaftar.`id_prodi` = prodi.`id`
+        AND pendaftar.`id_pengumuman` = 2";
+
+        $data['tidak_lulus'] = $this->db->query($sql2)->row_array();        
+        $data['tidak_lulus'] = $data['tidak_lulus']['jumlah'];   
+        
+        $sql3 = "SELECT count(pendaftar.id) as jumlah
+        FROM nilai_test
+        RIGHT JOIN pendaftar
+        ON pendaftar.`id` = nilai_test.id_pendaftar
+        INNER JOIN USER
+        ON pendaftar.`id_user_calon_mhs` = user.`id`
+        INNER JOIN prodi
+        ON pendaftar.`id_prodi` = prodi.`id`
+        INNER JOIN th_ajaran 
+        ON pendaftar.id_th_ajaran = th_ajaran.id
+        AND nilai_test.`skor` IS NULL";
+
+        $data['belum_dinilai'] = $this->db->query($sql3)->row_array();
+
+        $data['belum_dinilai'] = $data['belum_dinilai']['jumlah'];
 
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar', $data);
         $this->load->view('template/topbar', $data);
         $this->load->view('admin/index', $data);
         $this->load->view('template/footer');
+    }
+
+    public function aktivasi()
+    {
+        $status = $this->input->post('aktif');
+
+        $sql = "UPDATE pmb SET pmb.buka = $status";
+
+        $this->db->query($sql);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Status PMB telah diubah !
+		  </div>');
+
+            redirect('admin/index');
+
     }
 
     public function role()
@@ -162,10 +225,27 @@ class Admin extends CI_Controller
 
         redirect('admin/jadwal');
     }
+    
     public function data_calon_mahasiswa()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['judul'] = 'Data Prodi';
         $data['title'] = 'Data Calon Mahasiswa';
+        $data['prodi'] = $this->db->get('prodi')->result_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('admin/data_calon_mahasiswa', $data);
+        $this->load->view('template/footer');
+    }
+
+    public function detail($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Data Calon Mahasiswa';
+
+        $data['tahun_ajaran'] = $this->db->get('th_ajaran')->result_array();
 
         $sql = "SELECT pendaftar.`no_pendaftaran`, user.`nik`, pendaftar.`nama_lengkap`, prodi.`nama_prodi`, nilai_test.praktek, nilai_test.wawancara, nilai_test.skor, th_ajaran.tahun_ajaran
         FROM nilai_test
@@ -177,6 +257,7 @@ class Admin extends CI_Controller
         ON pendaftar.`id_prodi` = prodi.`id`
         INNER JOIN th_ajaran 
         ON pendaftar.id_th_ajaran = th_ajaran.id
+        WHERE prodi.`id` = $id
         ";
 
         $data['data_calon_mahasiswa'] = $this->db->query($sql)->result_array();
@@ -184,9 +265,46 @@ class Admin extends CI_Controller
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar', $data);
         $this->load->view('template/topbar', $data);
-        $this->load->view('admin/data_calon_mahasiswa', $data);
+        $this->load->view('admin/detail', $data);
         $this->load->view('template/footer');
     }
+
+    public function cetak_data_calon_mhs()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Data Calon Mahasiswa';
+
+        $th_ajaran = $this->input->post('th_ajaran');
+
+        $this->load->library('dompdf_gen');
+        $sql = "SELECT pendaftar.`no_pendaftaran`, user.`nik`, pendaftar.`nama_lengkap`, prodi.`nama_prodi`, nilai_test.praktek, nilai_test.wawancara, nilai_test.skor, pendaftar.id_th_ajaran, th_ajaran.tahun_ajaran
+        FROM nilai_test
+        RIGHT JOIN pendaftar
+        ON pendaftar.`id` = nilai_test.id_pendaftar
+        INNER JOIN USER
+        ON pendaftar.`id_user_calon_mhs` = user.`id`
+        INNER JOIN prodi
+        ON pendaftar.`id_prodi` = prodi.`id`
+        INNER JOIN th_ajaran
+        ON pendaftar.`id_th_ajaran` = th_ajaran.id
+        WHERE pendaftar.id_th_ajaran = $th_ajaran
+        ";
+
+        $data['data_calon_mahasiswa'] = $this->db->query($sql)->result_array();
+
+        $this->load->view('admin/cetak_data_calon_mhs', $data);
+
+        $paper_size = 'A4';
+        $orientation = 'potrait';
+
+        $html = $this->output->get_output();
+        $this->dompdf->set_paper($paper_size, $orientation);
+
+        $this->dompdf->load_html($html);
+        $this->dompdf->render();
+        $this->dompdf->stream('data calon mahasiswa.pdf', array('Attachment' => 0));
+    }
+
     public function buat_akun_penyeleksi()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -291,6 +409,7 @@ class Admin extends CI_Controller
         $data['title'] = 'Terbitkan Pengumuman';
 
         $data['th_ajaran'] = $this->db->get('th_ajaran')->result_array();
+        $data['prodi'] = $this->db->get('prodi')->result_array();
 
         $th_ajaran = $this->input->post('th_ajaran');
 
@@ -304,7 +423,7 @@ class Admin extends CI_Controller
         ON pendaftar.`id_prodi` = prodi.`id`
         INNER JOIN th_ajaran 
         ON pendaftar.id_th_ajaran = th_ajaran.id
-        AND nilai_test.`skor` IS NOT NULL
+        AND nilai_test.`skor` IS NULL
         AND `th_ajaran`.`id` = '$th_ajaran'
         ";
 
@@ -318,9 +437,18 @@ class Admin extends CI_Controller
         ON pendaftar.`id_prodi` = prodi.`id`
         INNER JOIN th_ajaran 
         ON pendaftar.id_th_ajaran = th_ajaran.id
-        AND nilai_test.`skor` IS NOT NULL
+        AND nilai_test.`skor` IS NULL
         AND `th_ajaran`.`id` = '$th_ajaran'
         ";
+
+        $sql2 = "SELECT `th_ajaran`.`tahun_ajaran`
+                    FROM th_ajaran
+                    WHERE th_ajaran.id = '$th_ajaran'";
+
+        $tahun_ajaran = $this->db->query($sql2)->row_array();
+
+        $tahun_ajaran = $tahun_ajaran['tahun_ajaran'];
+
 
         $data['cek_data'] = $this->db->query($sql1)->row_array();
         $data['cek_data'] = $data['cek_data']['jumlah'];
@@ -341,7 +469,7 @@ class Admin extends CI_Controller
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>');
             }else {
-                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">'.' Semua peserta di tahun ajaran'.$th_ajaran.'telah dinilai 
+                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">'.' Semua peserta di tahun ajaran '.$tahun_ajaran.' telah dinilai 
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>');
             }
@@ -353,5 +481,96 @@ class Admin extends CI_Controller
             $this->load->view('template/footer');
         }
     }
+    public function terbit_pengumuman()
+    {
+        $th_ajaran = $this->input->post('tahun_ajaran');
+        $prodi = $this->input->post('prodi');
+        $jumlah = $this->input->post('jumlah');
+        $jumlah = $jumlah+=1;
 
+        $sql3 = "SELECT COUNT(pendaftar.id) as jumlah
+        FROM nilai_test
+        RIGHT JOIN pendaftar
+        ON pendaftar.`id` = nilai_test.id_pendaftar
+        INNER JOIN USER
+        ON pendaftar.`id_user_calon_mhs` = user.`id`
+        INNER JOIN prodi
+        ON pendaftar.`id_prodi` = prodi.`id`
+        INNER JOIN th_ajaran 
+        ON pendaftar.id_th_ajaran = th_ajaran.id
+        AND nilai_test.`skor` IS NULL
+        AND `th_ajaran`.`id` = $th_ajaran";
+
+        $data['cek_data'] = $this->db->query($sql3)->row_array();
+        $data['cek_data'] = $data['cek_data']['jumlah'];
+
+        if ($data['cek_data'] > 0) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+        Masih ada peserta yang belum dinilai, silahkan cek kembali!
+      </div>');
+
+        redirect('admin/pengumuman');
+        }
+
+        $sql = "SELECT pendaftar.id, pendaftar.`no_pendaftaran`, user.`nik`, pendaftar.`nama_lengkap`, prodi.`nama_prodi`, nilai_test.praktek, nilai_test.wawancara, nilai_test.skor, th_ajaran.tahun_ajaran
+        FROM nilai_test
+        RIGHT JOIN pendaftar
+        ON pendaftar.`id` = nilai_test.id_pendaftar
+        INNER JOIN USER
+        ON pendaftar.`id_user_calon_mhs` = user.`id`
+        INNER JOIN prodi
+        ON pendaftar.`id_prodi` = prodi.`id`
+        INNER JOIN th_ajaran 
+        ON pendaftar.id_th_ajaran = th_ajaran.id
+        AND nilai_test.`skor` IS NOT NULL
+        AND `th_ajaran`.`id` = '$th_ajaran'
+        ORDER BY `nilai_test`.`skor` DESC
+        LIMIT $jumlah ";
+
+        $keterima = $this->db->query($sql)->result_array();
+
+        $jumlah_keterima = count($keterima);
+
+        if ($jumlah_keterima == 0) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+        Tidak ada calon mahasiswa pada tahun ajaran tersebut.
+      </div>');
+      redirect('admin/pengumuman');
+        }
+
+        $sql1 = "SELECT pendaftar.id, pendaftar.`no_pendaftaran`, user.`nik`, pendaftar.`nama_lengkap`, prodi.`nama_prodi`, nilai_test.praktek, nilai_test.wawancara, nilai_test.skor, th_ajaran.tahun_ajaran, pendaftar.id_pengumuman
+        FROM nilai_test
+        RIGHT JOIN pendaftar
+        ON pendaftar.`id` = nilai_test.id_pendaftar
+        INNER JOIN USER
+        ON pendaftar.`id_user_calon_mhs` = user.`id`
+        INNER JOIN prodi
+        ON pendaftar.`id_prodi` = prodi.`id`
+        INNER JOIN th_ajaran 
+        ON pendaftar.id_th_ajaran = th_ajaran.id
+        AND nilai_test.`skor` IS NOT NULL
+        AND `th_ajaran`.`id` = '$th_ajaran'
+        ORDER BY `nilai_test`.`skor` DESC";
+
+        $cek_mahasiswa = $this->db->query($sql1)->result_array();
+
+        for ($i=0; $i < count($cek_mahasiswa); $i++) { 
+            error_reporting(0);
+            $where = $keterima[$i]['id'];
+            $where1 = $cek_mahasiswa[$i]['id'];
+            if ($keterima[$i]['id'] == $cek_mahasiswa[$i]['id']) {
+                $sql2 = "UPDATE pendaftar SET pendaftar.id_pengumuman = 1 WHERE pendaftar.id = $where AND pendaftar.id_prodi = $prodi";
+              $this->db->query($sql2);
+            }else {
+                $sql2 = "UPDATE pendaftar SET pendaftar.id_pengumuman = 2 WHERE pendaftar.id = $where1 AND pendaftar.id_prodi = $prodi";
+                $this->db->query($sql2);
+            }
+        }
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        Pengumuman berhasi diterbitkan.
+      </div>');
+      redirect('admin/pengumuman');
+       
+    }
 }

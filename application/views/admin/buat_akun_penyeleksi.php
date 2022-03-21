@@ -48,32 +48,34 @@
                         </div>
                     </div>
                 </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">NIK</th>
-                            <th scope="col">NAMA LENGKAP</th>
-                            <th scope="col">EMAIL</th>
-                            <th scope="col">AKSI</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $i = 1; ?>
-                        <?php foreach ($penyeleksi as $p) : ?>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <th scope="row"><?= $i; ?></th>
-                                <td><?= $p['nik']; ?></td>
-                                <td><?= $p['nama_lengkap']; ?></td>
-                                <td><?= $p['email']; ?></td>
-                                <td>
-                                    <a class="btn badge bg-danger" onclick="javascript: return confirm('Anda yakin akan menghapus ini? ')" href="<?= base_url('admin/delete_penyeleksi/' . $p['id']) ?>"><i data-feather="trash-2" width="20" class="mb-1"></i>Hapus</a>
-                                </td>
+                                <th scope="col">#</th>
+                                <th scope="col">NIK</th>
+                                <th scope="col">NAMA LENGKAP</th>
+                                <th scope="col">EMAIL</th>
+                                <th scope="col">AKSI</th>
                             </tr>
-                        <?php $i++;
-                        endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php $i = 1; ?>
+                            <?php foreach ($penyeleksi as $p) : ?>
+                                <tr>
+                                    <th scope="row"><?= $i; ?></th>
+                                    <td><?= $p['nik']; ?></td>
+                                    <td><?= $p['nama_lengkap']; ?></td>
+                                    <td><?= $p['email']; ?></td>
+                                    <td>
+                                        <a class="btn badge bg-danger" onclick="javascript: return confirm('Anda yakin akan menghapus ini? ')" href="<?= base_url('admin/delete_penyeleksi/' . $p['id']) ?>"><i data-feather="trash-2" width="20" class="mb-1"></i>Hapus</a>
+                                    </td>
+                                </tr>
+                            <?php $i++;
+                            endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>

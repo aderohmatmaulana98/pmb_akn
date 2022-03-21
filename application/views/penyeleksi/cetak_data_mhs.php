@@ -44,6 +44,43 @@
                 <td style="border: 1px solid black;"><?= $dcm['skor'] ?></td>
             </tr>
         <?php endforeach; ?>
-    </table>
+    </table> <br><br><br><br><br>
+    <table>
+        <tr>
+            <td>
+                Penguji 1
+                <br><br><br><br>
+            </td>
+            <td width="440px">
 
+            </td>
+            <td>
+                Penguji 2
+                <br><br><br><br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p style="line-height: 70%;">............................<hr></p>
+            </td>
+            <td width="440px">
+
+            </td>
+            <td>
+                <p style="line-height: 70%;">............................<hr></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                NIP.
+            </td>
+            <td width="440px">
+
+            </td>
+            <td>
+                NIP.
+            </td>
+        </tr>
+        
+    </table>
 </body></html>

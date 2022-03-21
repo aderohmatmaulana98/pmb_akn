@@ -44,6 +44,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="table-responsive">
                 <table class="table table-hover" id="example">
                     <thead>
                         <tr>
@@ -113,7 +114,8 @@
                         <?php $i++;
                         endforeach; ?>
                     </tbody>
-                </table>
+                </table>                    
+                </div>
             </div>
         </div>
     </section>
