@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="<?= base_url('assets/admin_panel/') ?>assets/vendors/chartjs/Chart.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="<?= base_url('assets/admin_panel/') ?>assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="<?= base_url('assets/admin_panel/') ?>assets/css/app.css">

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 mx-auto mt-3">
             <div class="card pt-4">
-                <h2 class="text-center mb-3">Data Formulir Pendaftaran</h2>
+                <h2 class="text-center mb-3"><?= $title; ?></h2>
                 <!-- <div class="text-center">
                     <a href="<?= base_url('user/cetak_kartu_test') ?>" class="btn btn-primary"> <i data-feather="printer" width="20"></i> Cetak Kartu Test</a>
                     <a href="<?= base_url('user/biodata') ?>" class="btn btn-primary"><i data-feather="printer" width="20"></i> Data Cetak Formulir</a>
@@ -51,7 +51,7 @@
                                             <span class="badge bg-danger">Gelombang <?= $p['id_jadwal']; ?></span>
                                         </td>
                                         <td>
-                                            <span class="badge bg-success"><i class="fab fa-whatsapp"></i><?= ' ' . $p['telepon']; ?></span>
+                                            <span class="badge bg-success text-white"><a href="https://api.whatsapp.com/send?phone=<?= $p['telepon']; ?>"><i class="text-white fab fa-whatsapp"></i><?= ' ' . $p['telepon']; ?></a></span>
                                         </td>
                                         <td>
                                             <?php if ($p['status_finalisasi'] == 1) : ?>
@@ -77,10 +77,8 @@
                                             <?php endif; ?>
                                         </td>
                                         <td>
-                                            <?php if ($p['status_finalisasi'] == 1) : ?>
-                                                <a href="<?= base_url('user/cetak_kartu_test/' . $p['id'] . '/' . $p['id_user']) ?>" class="btn btn-success btn-sm">Cetak</a>
-                                            <?php endif; ?>
-                                            <a href="<?= base_url('user/detail_formulir/' . $p['nik']) ?>" class="btn btn-primary btn-sm">Lihat</a>
+                                            <a href="<?= base_url('user/cetak_kartu_test') ?>" class="btn btn-success btn-sm">Cetak</a>
+                                            <a href="<?= base_url('admin/detail_formulir/' . $p['nik']) ?>" class="btn btn-primary btn-sm">Lihat</a>
                                         </td>
                                     </tr>
                                 <?php $i++;

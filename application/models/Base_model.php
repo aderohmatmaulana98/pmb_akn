@@ -12,7 +12,8 @@ class Base_model extends CI_Model
     }
     public function getDataProv()
     {
-        return $this->db->get('provinsi')->result_array();
+        $sql = "SELECT * FROM provinsi ORDER BY provinsi.nama_provinsi ASC";
+        return $this->db->query($sql)->result_array();
     }
     public function getDataKabupaten($idprov)
     {
@@ -21,5 +22,9 @@ class Base_model extends CI_Model
     public function getDataKecamatan($idkabupaten)
     {
         return $this->db->get_where('kecamatan', ['id_kabupaten' => $idkabupaten])->result();
+    }
+    public function getDataSekolah($idkab)
+    {
+        return $this->db->get_where('sekolah', ['id_kab' => $idkab])->result();
     }
 }

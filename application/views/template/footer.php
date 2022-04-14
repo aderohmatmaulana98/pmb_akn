@@ -21,9 +21,10 @@
 <script src="<?= base_url('assets/admin_panel/') ?>assets/vendors/apexcharts/apexcharts.min.js"></script>
 <script src="<?= base_url('assets/admin_panel/') ?>assets/js/pages/dashboard.js"></script>
 <script src="<?= base_url('assets/admin_panel/') ?>assets/js/main.js"></script>
-
+<script src="https://kit.fontawesome.com/7f8e14bcae.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+
 
 <script>
     $('.form-check-input').on('click', function() {
@@ -51,9 +52,9 @@
 </script>
 
 <script>
-	$(document).ready(function() {
-    $('#example').DataTable();
-} );
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
 </script>
 
 </body>
