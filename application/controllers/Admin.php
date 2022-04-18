@@ -576,11 +576,12 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Data Belum Finalisasi';
 
-        $sql = "SELECT * 
-        FROM USER, pendaftar, prodi
-        WHERE user.`id` = pendaftar.`id_user_calon_mhs` 
-        AND pendaftar.`id_prodi` = prodi.`id`
-        AND pendaftar.`status_finalisasi` = 0";
+
+        $sql = "SELECT user.id AS id_user, user.nik, user.`email`, pendaftar.*, prodi.`nama_prodi`, prodi.`ruangan_praktek`, prodi.`ruangan_wawancara`
+                FROM user, pendaftar, prodi
+                WHERE user.`id` = pendaftar.`id_user_calon_mhs` 
+                AND pendaftar.`id_prodi` = prodi.`id`
+                AND pendaftar.`status_finalisasi` = 0";
 
         $data['pendaftar'] = $this->db->query($sql)->result_array();
 
@@ -828,5 +829,144 @@ class Admin extends CI_Controller
         Data berhasil dihapus !
       </div>');
         redirect("admin/detail_formulir/$nik");
+    }
+    public function surat_pernyataan()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Surat Pernyataan';
+
+        $data['surat_pernyataan'] = $this->db->get('surat_pernyataan')->row_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('admin/surat_pernyataan', $data);
+        $this->load->view('template/footer');
+    }
+    public function aksi_surat_pernyataan()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $surat = $this->input->post('editor1');
+
+        $data = [
+            'surat_pernyataan' => $surat
+        ];
+        $this->db->insert('surat_pernyataan', $data);
+
+        $this->db->where('id', 2);
+        $this->db->update('surat_pernyataan', $data);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-start" role="alert">
+        Surat pernyataan berhasil diubah !!
+      </div>');
+        redirect("admin/surat_pernyataan");
+    }
+    public function data_sudah_finalisasi()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Data Sudah Finalisasi';
+
+        $sql = "SELECT user.id AS id_user, user.nik, user.`email`, pendaftar.*, prodi.`nama_prodi`, prodi.`ruangan_praktek`, prodi.`ruangan_wawancara`
+        FROM user, pendaftar, prodi
+        WHERE user.`id` = pendaftar.`id_user_calon_mhs` 
+        AND pendaftar.`id_prodi` = prodi.`id`
+        AND pendaftar.`status_finalisasi` = 1";
+
+        $data['pendaftar'] = $this->db->query($sql)->result_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('admin/data_sudah_finalisasi', $data);
+        $this->load->view('template/footer');
+    }
+    public function cetak_kartu_test($id, $id_user)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        // $this->load->library('dompdf_gen');
+        $sql = "SELECT pendaftar.`no_pendaftaran`, pendaftar.`nama_lengkap`, pendaftar.`tempat_lahir`, pendaftar.`tanggal_lahir`, pendaftar.`jenis_kelamin`, prodi.nama_prodi, prodi.ruangan_praktek, prodi.ruangan_wawancara, jadwal.`tgl_test`, pendaftar.pas_foto, th_ajaran.tahun_ajaran
+        FROM user, pendaftar, jadwal, prodi, th_ajaran
+        WHERE user.`id` = pendaftar.`id_user_calon_mhs`
+        AND jadwal.`id` = pendaftar.`id_jadwal`
+        AND prodi.id = pendaftar.`id_prodi`
+        AND th_ajaran.id = pendaftar.id_th_ajaran
+        AND user.`id` = $id_user";
+        $data['kartu_test'] = $this->db->query($sql)->row_array();
+
+        $sql1 = "SELECT *
+        FROM USER, pendaftar, prodi, provinsi, kabupaten, kecamatan
+        WHERE user.`id` = pendaftar.`id_user_calon_mhs`
+        AND pendaftar.`id_prodi` = prodi.`id`
+        AND pendaftar.`id_provinsi` = provinsi.`id`
+        AND pendaftar.`id_kabupaten` = kabupaten.`id`
+        AND pendaftar.`id_kecamatan` = kecamatan.`id`
+        AND user.`id` = $id_user
+        AND pendaftar.`id` = $id";
+
+        $data['data_diri'] = $this->db->query($sql1)->row_array();
+
+        $sql4 = "SELECT * 
+        FROM user, data_prestasi
+        WHERE user.id = data_prestasi.`id_user_calon_mhs`
+        AND user.id = $id_user";
+        $data['prestasi'] = $this->db->query($sql4)->result_array();
+
+        $sql5 = "SELECT * 
+        FROM user, data_ortu, provinsi, kabupaten
+        WHERE user.`id` = data_ortu.`id_user_calon_mhs`
+        AND data_ortu.`id_provinsi_asal_ortu` = provinsi.`id`
+        AND data_ortu.`id_kabupaten_ortu` = kabupaten.`id`
+        AND user.`id` = $id_user";
+        $data['ortu'] = $this->db->query($sql5)->row_array();
+
+        $sql6 = "SELECT *
+        FROM user, detail_sekolah, provinsi
+        WHERE user.id = detail_sekolah.`id_user_calon_mhs`
+        AND provinsi.`id` = detail_sekolah.`id_provinsi`
+        AND user.id = $id_user";
+        $data['sekolah'] = $this->db->query($sql6)->row_array();
+
+        $data['surat_pernyataan'] = $this->db->get('surat_pernyataan')->row_array();
+
+        $data['foto'] = $data['kartu_test']['pas_foto'];
+        // $this->qrcode($data['foto']);
+        $this->load->view('user/kartu_test', $data);
+        // $paper_size = 'A4';
+        // $orientation = 'potrait';
+
+        // $html = $this->output->get_output();
+        // $this->dompdf->set_paper($paper_size, $orientation);
+
+        // $this->dompdf->load_html($html);
+        // $this->dompdf->render();
+        // $this->dompdf->stream('kartu test.pdf', array('Attachment' => 0));
+    }
+    public function delete_pendaftar($id_user)
+    {
+        $sql = "UPDATE user
+        SET cek_isi = NULL, isi_biodata = 0, isi_sekolah_asal = 0, isi_prestasi = 0, isi_data_ortu = 0
+        WHERE user.id = $id_user";
+        $this->db->query($sql);
+
+        $this->db->where('id_user_calon_mhs', $id_user);
+        $this->db->delete('pendaftar');
+
+        $this->db->where('id_user_calon_mhs', $id_user);
+        $this->db->delete('data_ortu');
+
+        $this->db->where('id_user_calon_mhs', $id_user);
+        $this->db->delete('data_prestasi');
+
+        $this->db->where('id_user_calon_mhs', $id_user);
+        $this->db->delete('detail_sekolah');
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-start" role="alert">
+        Pendaftaran berhasil dihapus !!
+      </div>');
+        redirect("admin/data_belum_finalisasi");
+    }
+    public function export_excel()
+    {
     }
 }

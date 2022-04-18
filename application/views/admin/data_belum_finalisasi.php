@@ -9,8 +9,11 @@
                 </div> -->
                 <div class="card-body">
                     <?= $this->session->flashdata('message');  ?>
+                    <div class="mb-3">
+                        <a href="<?= base_url('admin/export_excel') ?>" type="button" class="btn btn-success">Export Excel</a>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table table-striped" id="example" class="display">
+                        <table class="table table-striped" id="example" class="display" style="width:100%">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -77,8 +80,9 @@
                                             <?php endif; ?>
                                         </td>
                                         <td>
-                                            <a href="<?= base_url('user/cetak_kartu_test') ?>" class="btn btn-success btn-sm">Cetak</a>
+                                            <a href="<?= base_url('admin/cetak_kartu_test/' . $p['id'] . '/' . $p['id_user']) ?>" class="btn btn-success btn-sm">Cetak</a>
                                             <a href="<?= base_url('admin/detail_formulir/' . $p['nik']) ?>" class="btn btn-primary btn-sm">Lihat</a>
+                                            <a href="<?= base_url('admin/delete_pendaftar/' . $p['id_user']) ?>" onclick="javascript: return confirm('Anda yakin akan menghapus ini? ')" class="btn btn-danger btn-sm">Hapus</a>
                                         </td>
                                     </tr>
                                 <?php $i++;

@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="<?= base_url('assets/admin_panel/') ?>assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="<?= base_url('assets/admin_panel/') ?>assets/css/app.css">
     <link rel="shortcut icon" href="<?= base_url('assets/landing/assets/img/akn/logo_akn.png') ?>" type="image/x-icon">
+    <script src="//cdn.ckeditor.com/4.18.0/full/ckeditor.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
 </head>
 
 <body>

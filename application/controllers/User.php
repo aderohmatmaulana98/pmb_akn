@@ -82,11 +82,12 @@ class User extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->library('dompdf_gen');
-        $sql = "SELECT pendaftar.`no_pendaftaran`, pendaftar.`nama_lengkap`, pendaftar.`tempat_lahir`, pendaftar.`tanggal_lahir`, pendaftar.`jenis_kelamin`, prodi.nama_prodi, prodi.ruangan_praktek, prodi.ruangan_wawancara, jadwal.`tgl_test`, pendaftar.pas_foto
-        FROM user, pendaftar, jadwal, prodi
+        $sql = "SELECT pendaftar.`no_pendaftaran`, pendaftar.`nama_lengkap`, pendaftar.`tempat_lahir`, pendaftar.`tanggal_lahir`, pendaftar.`jenis_kelamin`, prodi.nama_prodi, prodi.ruangan_praktek, prodi.ruangan_wawancara, jadwal.`tgl_test`, pendaftar.pas_foto, th_ajaran.tahun_ajaran
+        FROM user, pendaftar, jadwal, prodi, th_ajaran
         WHERE user.`id` = pendaftar.`id_user_calon_mhs`
         AND jadwal.`id` = pendaftar.`id_jadwal`
         AND prodi.id = pendaftar.`id_prodi`
+        AND th_ajaran.id = pendaftar.id_th_ajaran
         AND user.`id` = $id_user";
         $data['kartu_test'] = $this->db->query($sql)->row_array();
 
@@ -103,10 +104,27 @@ class User extends CI_Controller
         $data['data_diri'] = $this->db->query($sql1)->row_array();
 
         $sql4 = "SELECT * 
-        FROM USER, data_prestasi
+        FROM user, data_prestasi
         WHERE user.id = data_prestasi.`id_user_calon_mhs`
         AND user.id = $id_user";
         $data['prestasi'] = $this->db->query($sql4)->result_array();
+
+        $sql5 = "SELECT * 
+        FROM user, data_ortu, provinsi, kabupaten
+        WHERE user.`id` = data_ortu.`id_user_calon_mhs`
+        AND data_ortu.`id_provinsi_asal_ortu` = provinsi.`id`
+        AND data_ortu.`id_kabupaten_ortu` = kabupaten.`id`
+        AND user.`id` = $id_user";
+        $data['ortu'] = $this->db->query($sql5)->row_array();
+
+        $sql6 = "SELECT *
+        FROM user, detail_sekolah, provinsi
+        WHERE user.id = detail_sekolah.`id_user_calon_mhs`
+        AND provinsi.`id` = detail_sekolah.`id_provinsi`
+        AND user.id = $id_user";
+        $data['sekolah'] = $this->db->query($sql6)->row_array();
+
+        $data['surat_pernyataan'] = $this->db->get('surat_pernyataan')->row_array();
 
         $data['foto'] = $data['kartu_test']['pas_foto'];
         // $this->qrcode($data['foto']);

@@ -163,12 +163,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="nama_sekolah" class="form-label">Nama Sekolah</label><br>
-                        <select name="nama_sekolah" class="form-select" id="nama_sekolah" required>
-                            <option value="" disabled>Pilih Sekolah</option>
-                            <?php foreach ($sekolah as $s) : ?>
-                                <option <?= ($s['nama_sekolah'] == $detail_sekolah['nama_sekolah']) ? 'selected' : '' ?> value="<?= $s['nama_sekolah'] ?>"><?= $s['nama_sekolah'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                        <input type="text" class="form-control" value="<?= $detail_sekolah['nama_sekolah'] ?>">
                     </div>
                     <div class="mb-3">
                         <label for="jenis_sekolah" class="form-label">Jenis Sekolah</label>

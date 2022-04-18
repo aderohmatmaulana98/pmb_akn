@@ -330,59 +330,61 @@
                                 <td width="1%" valign="top">1.</td>
                                 <td width="34%">Tahun Lulus SMTA</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"> <?= $data_diri['jalur_seleksi'] ?> </td>
+                                <td class="" width="64%"> <?= $sekolah['tahun_lulus'] ?> </td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">2.</td>
                                 <td width="34%">Jurusan SMTA</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['nama_lengkap'] ?></td>
+                                <td class="" width="64%"><?= $sekolah['jurusan'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">3.</td>
                                 <td width="34%">Jenis SMTA</td>
                                 <td width="2%">: </td>
-                                <?php if ($data_diri['jenis_kelamin'] == 1) : ?>
-                                    <td class="" width="64%">Laki - Laki</td>
-                                <?php else :  ?>
-                                    <td class="" width="64%">Perempuan</td>
-                                <?php endif; ?>
+                                <td class="" width="64%"><?= $sekolah['jenis_sekolah'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">4.</td>
                                 <td width="34%">Nama SMTA</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['provinsi_tempat_lahir'] ?></td>
+                                <td class="" width="64%"><?= $sekolah['nama_sekolah'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">5.</td>
                                 <td width="34%">Provinsi Asal SMTA</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['tempat_lahir'] ?></td>
+                                <td class="" width="64%"><?= $sekolah['nama_provinsi'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">6.</td>
                                 <td width="34%">Alamat Lengkap SMTA</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['tanggal_lahir'] ?></td>
+                                <td class="" width="64%"><?= $sekolah['alamat_lengkap_sekolah'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">7.</td>
-                                <td width="34%">Status Kelulusan</td>
-                                <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['nama_provinsi'] ?></td>
+                                <td width="34%" valign="top">Status Kelulusan</td>
+                                <td width="2%" valign="top">: </td>
+                                <td class="" width="64%">
+                                    <?php if ($sekolah['status_kelulusan'] == 1) : ?>
+                                        <p>Lulus</p>
+                                    <?php else : ?>
+                                        <p>Belum Lulus</p>
+                                    <?php endif; ?>
+                                </td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">8.</td>
                                 <td width="34%">No Ijazah SMTA</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['kabupaten'] ?></td>
+                                <td class="" width="64%"><?= $sekolah['no_ijazah'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">9.</td>
                                 <td width="34%">Tanggal Ijazah SMTA</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['alamat'] ?></td>
+                                <td class="" width="64%"><?= $sekolah['tgl_ijazah'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">10.</td>
@@ -400,9 +402,9 @@
                                             <td>Matematika</td>
                                         </tr>
                                         <tr align="center">
-                                            <td>80</td>
-                                            <td>80</td>
-                                            <td>80</td>
+                                            <td><?= $sekolah['bhs_indonesia'] ?></td>
+                                            <td><?= $sekolah['bhs_inggris'] ?></td>
+                                            <td><?= $sekolah['matematika'] ?></td>
                                         </tr>
                                     </table>
                                 </td>
@@ -447,95 +449,91 @@
                                 <td width="1%" valign="top">1.</td>
                                 <td width="34%">Nama Ayah</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"> <?= $data_diri['jalur_seleksi'] ?> </td>
+                                <td class="" width="64%"> <?= $ortu['nama_ayah'] ?> </td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">2.</td>
                                 <td width="34%">Pendidikan Terakhir Ayah</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['nama_lengkap'] ?></td>
+                                <td class="" width="64%"><?= $ortu['pendidikan_terakhir_ayah'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">3.</td>
                                 <td width="34%">Pekerjaan Ayah</td>
                                 <td width="2%">: </td>
-                                <?php if ($data_diri['jenis_kelamin'] == 1) : ?>
-                                    <td class="" width="64%">Laki - Laki</td>
-                                <?php else :  ?>
-                                    <td class="" width="64%">Perempuan</td>
-                                <?php endif; ?>
+                                <td class="" width="64%"><?= $ortu['pekerjaan_ayah']; ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">4.</td>
                                 <td width="34%">Penghasilan Ayah</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['provinsi_tempat_lahir'] ?></td>
+                                <td class="" width="64%"><?= $ortu['penghasilan_ayah'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">5.</td>
                                 <td width="34%">Nama Ibu</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['tempat_lahir'] ?></td>
+                                <td class="" width="64%"><?= $ortu['nama_ibu'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">6.</td>
                                 <td width="34%">Pendidikan Terakhir Ibu</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['tanggal_lahir'] ?></td>
+                                <td class="" width="64%"><?= $ortu['pendidikan_terakhir_ibu'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">7.</td>
                                 <td width="34%">Pekerjaan Ibu</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['nama_provinsi'] ?></td>
+                                <td class="" width="64%"><?= $ortu['pekerjaan_ibu'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">8.</td>
                                 <td width="34%">Penghasilan Ibu</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['kabupaten'] ?></td>
+                                <td class="" width="64%"><?= $ortu['penghasilan_ibu'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">9.</td>
                                 <td width="34%">Alamat Lengkap Orang Tua</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['alamat'] ?></td>
+                                <td class="" width="64%"><?= $ortu['alamat_lengkap_ortu'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">10.</td>
                                 <td width="34%">Provinsi Asal Orang Tua</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['nama_kecamatan'] ?></td>
+                                <td class="" width="64%"><?= $ortu['nama_provinsi'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">11.</td>
                                 <td width="34%">Kota / Kabupaten Orang Tua</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['kode_pos'] ?></td>
+                                <td class="" width="64%"><?= $ortu['kabupaten'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">12.</td>
                                 <td width="34%">Kode Pos Alamat Orang Tua</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['kewarganegaraan'] ?></td>
+                                <td class="" width="64%"><?= $ortu['kode_pos_ortu'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">13.</td>
                                 <td width="34%">Nama Wali(Jika Ada)</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['telepon'] ?></td>
+                                <td class="" width="64%"><?= $ortu['nama_wali'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">14.</td>
                                 <td width="34%">Pekerjaan Wali</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['status_pernikahan'] ?></td>
+                                <td class="" width="64%"><?= $ortu['pekerjaan_wali'] ?></td>
                             </tr>
                             <tr>
                                 <td width="1%" valign="top">15.</td>
                                 <td width="34%">Alamat Lengkap Wali</td>
                                 <td width="2%">: </td>
-                                <td class="" width="64%"><?= $data_diri['agama'] ?></td>
+                                <td class="" width="64%"><?= $ortu['alamat_lengkap_wali'] ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -546,8 +544,52 @@
                 <p>Yogyakarta,</p>
                 <p>Pendaftar/Calon Mahasiswa</p>
                 <br><br>
-                <p>(Hallo Test)</p>
+                <p><?= $data_diri['nama_lengkap'] ?></p>
             </div>
+        </div>
+    </div>
+    <div style="page-break-after: always;"></div>
+    <br>
+    <div class="container-sm mt-5">
+        <div>
+            <h4 class="text-center">
+                SURAT PERNYATAAN <br> MENJADI MAHASISWA AKADEMI KOMUNITAS NEGERI SENI DAN BUDAYA YOGYAKARTA
+                <br> TAHUN AKADEMIK <?= $kartu_test['tahun_ajaran'] ?>
+            </h4>
+        </div>
+        <div>
+            <p>Saya yang bertanda tangan dibawah ini :</p>
+            <table>
+                <tr>
+                    <td>Nama</td>
+                    <td>:</td>
+                    <td><?= $data_diri['nama_lengkap'] ?></td>
+                </tr>
+                <tr>
+                    <td>No Test</td>
+                    <td>:</td>
+                    <td><?= $data_diri['no_pendaftaran'] ?></td>
+                </tr>
+                <tr>
+                    <td>Tempat/Tanggal Lahir</td>
+                    <td>:</td>
+                    <td><?= $data_diri['tempat_lahir'] . ', ' . date('d-m-Y', strtotime($data_diri['tanggal_lahir'])) ?></td>
+                </tr>
+                <tr>
+                    <td>Alamat</td>
+                    <td>:</td>
+                    <td><?= $data_diri['alamat']; ?></td>
+                </tr>
+            </table>
+            <br>
+            <?= $surat_pernyataan['surat_pernyataan']; ?>
+            <br>
+            <br>
+            <p class="text-right">Yogyakarta, <?= date('d-m-Y'); ?></p>
+            <br>
+            <p class="text-right" style="font-size: 9pt; margin-right: 80px;">Materai Rp.10000,-</p>
+            <br>
+            <p class="text-right">(<?= $data_diri['nama_lengkap'] ?>)</p>
         </div>
     </div>
     <script>

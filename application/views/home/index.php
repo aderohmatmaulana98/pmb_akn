@@ -28,7 +28,7 @@
     <div class="apldg-body-overlay"></div>
 
     <!-- Preloader-->
-    <div class="loading-preloader">
+    <!-- <div class="loading-preloader">
         <div id="loading-preloader">
             <div class="line_shape"></div>
             <div class="line_shape"></div>
@@ -41,7 +41,7 @@
             <div class="line_shape"></div>
             <div class="line_shape"></div>
         </div>
-    </div>
+    </div> -->
     <!-- Preloader End -->
 
     <!-- ScrollTop Button -->
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-lg-2 col-6">
                     <div class="apldg-header-right">
-                        <?php if($buka == 1) :?>
+                        <?php if ($buka == 1) : ?>
                             <a href="<?= base_url('auth/index'); ?>" class="apldg-primary-btn">Login</a>
                         <?php else : ?>
                             <a href="#" class="apldg-primary-btn" onclick="Swal.fire(
@@ -119,7 +119,7 @@
 
     <!-- Hero Slider -->
     <section class="apldg-hero-slider-area" id="home">
-        <span class="apldg-hero-vector-1"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang.png" alt="" ></span>
+        <span class="apldg-hero-vector-1"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang.png" alt=""></span>
         <span class="apldg-hero-vector-2"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang2.png" alt=""></span>
         <span class="apldg-hero-vector-3"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/semar.png" alt=""></span>
         <span class="apldg-hero-vector-4"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang3.png" alt=""></span>
@@ -177,7 +177,7 @@
     <!-- Hero Slider End -->
 
     <!-- Why Choose Us Section -->
-    
+
     <section class="sampeu" id="prodi">
         <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/bimaun.png" alt=""></span>
         <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/pandawa1.png" alt=""></span>
@@ -258,292 +258,292 @@
 
     <!-- Why Choose Us Section -->
     <section class="apldg-choose-us">
-    <section  id="jadwal_penting">
-        <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/semar.png" alt=""></span>
-        <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/gareng.png" alt=""></span>
-        <span class="apldg-object-7"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/petruk.png" alt=""></span>
-        <div class="container">
-            <div class="text-center">
-                <div class="apldg-choose-right">
-                    <div class="apldg-title-area">
-                        <span class="apldg-subtitle">Jadwal Penting</span>
-                        <div class="apldg-headline">
-                            <h3 style="text-transform: uppercase;">Jadwal Penerimaan Mahasiswa Baru</h3>
-                        </div>
-                        <div>
-                            <hr style="color: blue; height: 50px;">
-                        </div>
-                        <div class="apldg-pera-txt">
-                            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-lg-12 order-12 order-lg-1">
-                    <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right col-lg-8" style="background-color: orange;">
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
-                        </div>
-                        <div class="card shadow col-lg-6">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Gelombang</th>
-                                                <th scope="col">Tanggal Buka</th>
-                                                <th scope="col">Tanggal Tutup</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Gelombang 1</td>
-                                                <td>03 Februari 2022</td>
-                                                <td>06 April 2022</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Gelombang 2</td>
-                                                <td>03 Februari 2022</td>
-                                                <td>06 April 2022</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+        <section id="jadwal_penting">
+            <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/semar.png" alt=""></span>
+            <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/gareng.png" alt=""></span>
+            <span class="apldg-object-7"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/petruk.png" alt=""></span>
+            <div class="container">
+                <div class="text-center">
+                    <div class="apldg-choose-right">
+                        <div class="apldg-title-area">
+                            <span class="apldg-subtitle">Jadwal Penting</span>
+                            <div class="apldg-headline">
+                                <h3 style="text-transform: uppercase;">Jadwal Penerimaan Mahasiswa Baru</h3>
+                            </div>
+                            <div>
+                                <hr style="color: blue; height: 50px;">
+                            </div>
+                            <div class="apldg-pera-txt">
+                                <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
                             </div>
                         </div>
-                        <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right col-lg-8" style="background-color: orange;">
-                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-    <!-- Choose Us End -->
-
-    <section style="margin-top: 10%;" id="kontak">
-        <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/pandawa2.png" alt=""></span>
-        <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang.png" alt=""></span>
-        <span class="apldg-object-7"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang2.png" alt=""></span>
-        <div class="container">
-            <div class="text-center">
-                <div class="apldg-choose-right">
-                    <div class="apldg-title-area">
-                        <span class="apldg-subtitle">Kontak Kami</span>
-                        <div class="apldg-headline">
-                            <h3 style="text-transform: uppercase;">Kontak Panitia PMB</h3>
+                <div class="row align-items-center">
+                    <div class="col-lg-12 order-12 order-lg-1">
+                        <div class="d-flex justify-content-center">
+                            <div class="card-header border-bottom-warning text-right col-lg-8" style="background-color: orange;">
+                            </div>
                         </div>
-                        <div>
-                            <hr style="color: blue; height: 50px;">
-                        </div>
-                        <div class="apldg-pera-txt">
-                            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center d-flex justify-content-center">
-                <div class="col-lg-10 order-12 order-lg-1">
-                    <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: orange;">
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
-                        </div>
-                        <div class="card shadow-lg col-lg-10 px-5 py-3">
-                            <p>Anda dapat menghubungi panitia PMB Berikut ini : </p>
-                            <p>Telepon pada jam kerja : </p>
-                            <div class="row ml-4">
-
-                                <div class="col-lg-6-12 row ml-4">
-                                    <div class="col-lg-12">
-                                        <div class="row">
-                                            <img src="<?= base_url('assets/landing/assets/img/akn/icon/whatsapp.png') ?>" style="width: 40px; height: 40px;" alt="" srcset="">
-                                            <p class="mx-2 mt-2">+62 821-3744-7834</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 my-3">
-                                        <div class="row">
-                                            <img src="<?= base_url('assets/landing/assets/img/akn/icon/email.png') ?>" style="width: 40px; height: 40px;" alt="" srcset="">
-                                            <p class="mx-2 mt-2"> pmb.akn.ac.id</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6-12 row ml-4 ">
-                                    <div class="col-lg-12">
-                                        <div class="row">
-                                            <img src="<?= base_url('assets/landing/assets/img/akn/icon/telephone.png') ?>" style="width: 40px; height: 40px;" alt="" srcset="">
-                                            <p class="mx-2 mt-2">0274-774289</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 my-3">
-                                        <div class="row">
-                                            <img src="<?= base_url('assets/landing/assets/img/akn/icon/web.png') ?>" style="width: 40px; height: 40px;" alt="" srcset="">
-                                            <p class="mx-2 mt-2"> pmb.akn.ac.id</p>
-                                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
+                            </div>
+                            <div class="card shadow col-lg-6">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Gelombang</th>
+                                                    <th scope="col">Tanggal Buka</th>
+                                                    <th scope="col">Tanggal Tutup</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Gelombang 1</td>
+                                                    <td>03 Februari 2022</td>
+                                                    <td>06 April 2022</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Gelombang 2</td>
+                                                    <td>03 Februari 2022</td>
+                                                    <td>06 April 2022</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
+                            <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
+                            </div>
                         </div>
-                        <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: orange;">
+                        <div class="d-flex justify-content-center">
+                            <div class="card-header border-bottom-warning text-right col-lg-8" style="background-color: orange;">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <!-- Choose Us End -->
+
+        <section style="margin-top: 10%;" id="kontak">
+            <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/pandawa2.png" alt=""></span>
+            <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang.png" alt=""></span>
+            <span class="apldg-object-7"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang2.png" alt=""></span>
+            <div class="container">
+                <div class="text-center">
+                    <div class="apldg-choose-right">
+                        <div class="apldg-title-area">
+                            <span class="apldg-subtitle">Kontak Kami</span>
+                            <div class="apldg-headline">
+                                <h3 style="text-transform: uppercase;">Kontak Panitia PMB</h3>
+                            </div>
+                            <div>
+                                <hr style="color: blue; height: 50px;">
+                            </div>
+                            <div class="apldg-pera-txt">
+                                <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center d-flex justify-content-center">
+                    <div class="col-lg-10 order-12 order-lg-1">
+                        <div class="d-flex justify-content-center">
+                            <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: orange;">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
+                            </div>
+                            <div class="card shadow-lg col-lg-10 px-5 py-3">
+                                <p>Anda dapat menghubungi panitia PMB Berikut ini : </p>
+                                <p>Telepon pada jam kerja : </p>
+                                <div class="row ml-4">
+
+                                    <div class="col-lg-6-12 row ml-4">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <img src="<?= base_url('assets/landing/assets/img/akn/icon/whatsapp.png') ?>" style="width: 40px; height: 40px;" alt="" srcset="">
+                                                <p class="mx-2 mt-2">+62 821-3744-7834</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 my-3">
+                                            <div class="row">
+                                                <img src="<?= base_url('assets/landing/assets/img/akn/icon/email.png') ?>" style="width: 40px; height: 40px;" alt="" srcset="">
+                                                <p class="mx-2 mt-2"> pmb.akn.ac.id</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6-12 row ml-4 ">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <img src="<?= base_url('assets/landing/assets/img/akn/icon/telephone.png') ?>" style="width: 40px; height: 40px;" alt="" srcset="">
+                                                <p class="mx-2 mt-2">0274-774289</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 my-3">
+                                            <div class="row">
+                                                <img src="<?= base_url('assets/landing/assets/img/akn/icon/web.png') ?>" style="width: 40px; height: 40px;" alt="" srcset="">
+                                                <p class="mx-2 mt-2"> pmb.akn.ac.id</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: orange;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </section>
-    </section>
-    
+
     <section class="">
-    <section class="sampeu" id="alur">
-        <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang3.png" alt=""></span>
-        <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang.png" alt=""></span>
-        <span class="apldg-object-7"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/semar.png" alt=""></span>
-        <span><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/gunungan.png" style="width: 500px; height: 765px; position: absolute; right: 0; z-index: -1;"></span>
-        <div class="container">
-            <div class="text-center">
-                <div class="apldg-choose-right">
-                    <div class="apldg-title-area">
-                        <span class="apldg-subtitle">Alur</span>
-                        <div class="apldg-headline">
-                            <h3 style="text-transform: uppercase;">ALUR PENDAFTARAN PMB</h3>
-                        </div>
-                        <div>
-                            <hr style="color: blue; height: 50px;">
-                        </div>
-                        <div class="apldg-pera-txt">
-                            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center d-flex justify-content-center">
-                <div class="col-lg-10 order-12 order-lg-1">
-                    <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: orange;">
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
-                        </div>
-                        <div class="card shadow-lg col-lg-10 px-5 py-3">
-                            <p><B>Akademi Komunitas Negeri Seni dan Budaya Yogyakarta tidak memungut biaya pendaftaran pada tahun akademik 2021/2022.</B></p>
-                            <p><b>Alur Penerimaan Mahasiswa Baru secara online : </b></p>
-                            <div class="row ml-2">
-                                <div class="col-lg-12 row">
-                                    <ol>
-                                        <li type="">Calon Mahasiswa melakukan pengisian form registrasi pendaftaran akun</li>
-                                        <li>Login dengan akun yang sudah dibuat</li>
-                                        <li>Mengisi formulir pendaftaran sampai lengkap dan melakukan finalisasi data setelah data lengkap. Pastikan lengkapi data dahulu baru finaslisasi.</li>
-                                        <li>Cetak formulir pendaftaran online</li>
-                                        <li>Kumpulkan berkas/ formulir pendaftaran online yang sudah dicetak beserta kelengkapan berkas pendaftaran ke Kampus Akademi Komunitas Negeri Seni dan Budaya Yogyakarta</li>
-                                        <li>Verifikasi Berkas oleh pertugas</li>
-                                        <li>Pengumuman seleksi</li>
-                                    </ol>
-                                </div>
+        <section class="sampeu" id="alur">
+            <span class="apldg-object-5"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang3.png" alt=""></span>
+            <span class="apldg-object-6"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang.png" alt=""></span>
+            <span class="apldg-object-7"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/semar.png" alt=""></span>
+            <span><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/gunungan.png" style="width: 500px; height: 765px; position: absolute; right: 0; z-index: -1;"></span>
+            <div class="container">
+                <div class="text-center">
+                    <div class="apldg-choose-right">
+                        <div class="apldg-title-area">
+                            <span class="apldg-subtitle">Alur</span>
+                            <div class="apldg-headline">
+                                <h3 style="text-transform: uppercase;">ALUR PENDAFTARAN PMB</h3>
                             </div>
-                            <p><b>Untuk informasi lebih lengkap bisa download file di</b> <a class="text-primary" href="https://aknyogya.ac.id/download/get_file/9">DOWNLOAD FILE</a></p>
-                        </div>
-                        <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
+                            <div>
+                                <hr style="color: blue; height: 50px;">
+                            </div>
+                            <div class="apldg-pera-txt">
+                                <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
+                            </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: orange;">
+                </div>
+                <div class="row align-items-center d-flex justify-content-center">
+                    <div class="col-lg-10 order-12 order-lg-1">
+                        <div class="d-flex justify-content-center">
+                            <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: orange;">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
+                            </div>
+                            <div class="card shadow-lg col-lg-10 px-5 py-3">
+                                <p><B>Akademi Komunitas Negeri Seni dan Budaya Yogyakarta tidak memungut biaya pendaftaran pada tahun akademik 2021/2022.</B></p>
+                                <p><b>Alur Penerimaan Mahasiswa Baru secara online : </b></p>
+                                <div class="row ml-2">
+                                    <div class="col-lg-12 row">
+                                        <ol>
+                                            <li type="">Calon Mahasiswa melakukan pengisian form registrasi pendaftaran akun</li>
+                                            <li>Login dengan akun yang sudah dibuat</li>
+                                            <li>Mengisi formulir pendaftaran sampai lengkap dan melakukan finalisasi data setelah data lengkap. Pastikan lengkapi data dahulu baru finaslisasi.</li>
+                                            <li>Cetak formulir pendaftaran online</li>
+                                            <li>Kumpulkan berkas/ formulir pendaftaran online yang sudah dicetak beserta kelengkapan berkas pendaftaran ke Kampus Akademi Komunitas Negeri Seni dan Budaya Yogyakarta</li>
+                                            <li>Verifikasi Berkas oleh pertugas</li>
+                                            <li>Pengumuman seleksi</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                <p><b>Untuk informasi lebih lengkap bisa download file di</b> <a class="text-primary" href="https://aknyogya.ac.id/download/get_file/9">DOWNLOAD FILE</a></p>
+                            </div>
+                            <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="card-header border-bottom-warning text-right col-lg-12" style="background-color: orange;">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Testimonial Section -->
-    <section class="apldg-testimonial-section">
-        <span class="apldg-object-16"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/slider/gareng.png" alt=""></span>
-        <span class="apldg-object-17"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang2.png" alt=""></span>
-        <span class="apldg-circle-shape"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/petruk.png" alt=""></span>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="apldg-title-area text-center">
-                        <span class="apldg-subtitle">Testimonial</span>
-                        <div class="apldg-headline">
-                            <h2>Whats our clients say</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 offset-lg-0 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
-                    <div class="apldg-feedback-slider">
-                        <div class="apldg-feedback-single">
-                            <div class="apldg-img-wrapper">
-                                <img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/client-1.jpg" alt="">                                
-                            </div>
-                            <div class="apldg-feedback-content">
-                                <div class="apldg-pera-txt">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                </div>
-                                <div class="apldg-clients-info apldg-headline">
-                                    <h5>Jumat Legen</h5>
-                                    <span class="designation">Acara rutinan setiap bulan</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="apldg-feedback-single">
-                            <div class="apldg-img-wrapper">
-                                <img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/client-2.jpg" alt="">
-                                <div class="apldg-star-rating">
-                                    <span><i class="fas fa-star"></i>4.5</span>
-                                </div>
-                            </div>
-                            <div class="apldg-feedback-content">
-                                <div class="apldg-pera-txt">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                </div>
-                                <div class="apldg-clients-info apldg-headline">
-                                    <h5>Jhon Smith</h5>
-                                    <span class="designation">UI/UX Designer</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="apldg-feedback-single">
-                            <div class="apldg-img-wrapper">
-                                <img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/client-1.jpg" alt="">
-                                <div class="apldg-star-rating">
-                                    <span><i class="fas fa-star"></i>4.5</span>
-                                </div>
-                            </div>
-                            <div class="apldg-feedback-content">
-                                <div class="apldg-pera-txt">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                </div>
-                                <div class="apldg-clients-info apldg-headline">
-                                    <h5>Jhon Smith</h5>
-                                    <span class="designation">UI/UX Designer</span>
-                                </div>
+        <!-- Testimonial Section -->
+        <section class="apldg-testimonial-section">
+            <span class="apldg-object-16"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/slider/gareng.png" alt=""></span>
+            <span class="apldg-object-17"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang2.png" alt=""></span>
+            <span class="apldg-circle-shape"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/petruk.png" alt=""></span>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3">
+                        <div class="apldg-title-area text-center">
+                            <span class="apldg-subtitle">Testimonial</span>
+                            <div class="apldg-headline">
+                                <h2>Whats our clients say</h2>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-lg-12 offset-lg-0 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
+                        <div class="apldg-feedback-slider">
+                            <div class="apldg-feedback-single">
+                                <div class="apldg-img-wrapper">
+                                    <img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/client-1.jpg" alt="">
+                                </div>
+                                <div class="apldg-feedback-content">
+                                    <div class="apldg-pera-txt">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                    </div>
+                                    <div class="apldg-clients-info apldg-headline">
+                                        <h5>Jumat Legen</h5>
+                                        <span class="designation">Acara rutinan setiap bulan</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="apldg-feedback-single">
+                                <div class="apldg-img-wrapper">
+                                    <img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/client-2.jpg" alt="">
+                                    <div class="apldg-star-rating">
+                                        <span><i class="fas fa-star"></i>4.5</span>
+                                    </div>
+                                </div>
+                                <div class="apldg-feedback-content">
+                                    <div class="apldg-pera-txt">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                    </div>
+                                    <div class="apldg-clients-info apldg-headline">
+                                        <h5>Jhon Smith</h5>
+                                        <span class="designation">UI/UX Designer</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="apldg-feedback-single">
+                                <div class="apldg-img-wrapper">
+                                    <img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/client-1.jpg" alt="">
+                                    <div class="apldg-star-rating">
+                                        <span><i class="fas fa-star"></i>4.5</span>
+                                    </div>
+                                </div>
+                                <div class="apldg-feedback-content">
+                                    <div class="apldg-pera-txt">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                    </div>
+                                    <div class="apldg-clients-info apldg-headline">
+                                        <h5>Jhon Smith</h5>
+                                        <span class="designation">UI/UX Designer</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        </div>
-    </section>
+            </div>
+        </section>
     </section>
     <!-- Testimonial Section End -->
 
