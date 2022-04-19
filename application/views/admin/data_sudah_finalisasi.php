@@ -11,7 +11,7 @@
                     <?= $this->session->flashdata('message');  ?>
                     <div class="btn-group mb-3" role="group" aria-label="Basic mixed styles example">
                         <a href="<?= base_url('admin/export_excel_lulus') ?>" type="button" class="btn btn-success">Export(Lulus)</a>
-                        <a href="#" type="button" class="btn btn-warning">Export(Tdk Lulus)</a>
+                        <a href="<?= base_url('admin/export_excel_tidak_lulus') ?>" type="button" class="btn btn-warning">Export(Tdk Lulus)</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped" id="example" class="display" style="width:100%">

@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <?= $this->session->flashdata('message');  ?>
                     <div class="mb-3">
-                        <a href="<?= base_url('admin/export_excel') ?>" type="button" class="btn btn-success">Export Excel</a>
+                        <a href="<?= base_url('admin/export_belum_final') ?>" type="button" class="btn btn-success">Export Excel</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped" id="example" class="display" style="width:100%">

@@ -969,20 +969,43 @@ class Admin extends CI_Controller
     public function export_excel_lulus()
     {
         $data['data_mhs'] = $this->db->query('SELECT *
-                            FROM USER
+                            FROM user
                             LEFT JOIN pendaftar
-                            ON user.`id` = pendaftar.`id_user_calon_mhs`
-                            LEFT JOIN detail_sekolah
-                            ON user.`id` = detail_sekolah.`id_user_calon_mhs`
-                            LEFT JOIN data_ortu
-                            ON user.id = data_ortu.`id_user_calon_mhs`
-                            LEFT JOIN prodi
-                            ON prodi.`id` = pendaftar.`id_prodi`
-                            LEFT JOIN kecamatan
-                            ON kecamatan.`id` = pendaftar.`id_kecamatan`
+                            ON pendaftar.`id_user_calon_mhs` = user.`id`
+                            LEFT JOIN provinsi
+                            ON pendaftar.`id_provinsi` = provinsi.`id`
                             LEFT JOIN kabupaten
-                            ON kabupaten.`id` = pendaftar.`id_kabupaten`
-                            WHERE user.`role_id` = 4')->result();
+                            ON pendaftar.`id_kabupaten` = kabupaten.`id`
+                            LEFT JOIN kecamatan
+                            ON pendaftar.`id_kecamatan` = kecamatan.`id`
+                            LEFT JOIN prodi
+                            ON pendaftar.`id_prodi` = prodi.`id`
+                            WHERE user.`role_id` = 4
+                            AND pendaftar.id_pengumuman = 1')->result();
+        $ortu = $this->db->query('SELECT *
+                        FROM user
+                        LEFT JOIN data_ortu
+                        ON data_ortu.`id_user_calon_mhs` = user.`id`
+                        LEFT JOIN provinsi
+                        ON provinsi.`id` = data_ortu.`id_provinsi_asal_ortu`
+                        LEFT JOIN kabupaten
+                        ON kabupaten.`id` = data_ortu.`id_kabupaten_ortu`
+                        INNER JOIN pendaftar
+                        ON pendaftar.`id_user_calon_mhs` = user.`id`
+                        WHERE user.`role_id` = 4
+                        AND pendaftar.id_pengumuman = 1')->result();
+
+        $sekolah = $this->db->query('SELECT * 
+                    FROM user
+                    LEFT JOIN detail_sekolah
+                    ON user.id = detail_sekolah.`id_user_calon_mhs`
+                    LEFT JOIN provinsi
+                    ON detail_sekolah.`id_provinsi` = provinsi.`id`
+                    INNER JOIN pendaftar
+                    ON pendaftar.`id_user_calon_mhs` = user.`id`
+                    WHERE user.`role_id` = 4
+                    AND pendaftar.id_pengumuman = 1')->result();
+
         require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel.php');
         require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
 
@@ -995,9 +1018,8 @@ class Admin extends CI_Controller
 
         $objPHPExcel->setActiveSheetIndex(0);
 
-        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Data Mahasiswa')->mergeCells('A1:BA2')->getStyle()->getFont()->setSize(26)->setBold(true);
-        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Data Mahasiswa')->mergeCells('A1:BA2')->getStyle()->getAlignment('A1')->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objPHPExcel->getActiveSheet()->setCellValue('A3', 'NO');
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Data Calon Mahasiswa Lulus')->mergeCells('A1:BA2')->getStyle()->getFont()->setSize(26)->setBold(true);
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Data Calon Mahasiswa Lulus')->mergeCells('A1:BA2')->getStyle()->getAlignment('A1')->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $objPHPExcel->getActiveSheet()->setCellValue('A3', 'NO');
         $objPHPExcel->getActiveSheet()->setCellValue('B3', 'NO PENDAFTAR');
         $objPHPExcel->getActiveSheet()->setCellValue('C3', 'JALUR SELEKSI');
@@ -1014,6 +1036,7 @@ class Admin extends CI_Controller
         $objPHPExcel->getActiveSheet()->setCellValue('N3', 'KODE POS TEMPAT TINGGAL');
         $objPHPExcel->getActiveSheet()->setCellValue('O3', 'KEWARGANEGARAAN');
         $objPHPExcel->getActiveSheet()->setCellValue('P3', 'STATUS PERNIKAHAN');
+
         $objPHPExcel->getActiveSheet()->setCellValue('Q3', 'NO TELEPON ORANG TUA');
         $objPHPExcel->getActiveSheet()->setCellValue('R3', 'NAMA AYAH');
         $objPHPExcel->getActiveSheet()->setCellValue('S3', 'PENDIDIKAN TERAKHIR AYAH');
@@ -1030,6 +1053,7 @@ class Admin extends CI_Controller
         $objPHPExcel->getActiveSheet()->setCellValue('AD3', 'NAMA WALI');
         $objPHPExcel->getActiveSheet()->setCellValue('AE3', 'PEKERJAAN WALI');
         $objPHPExcel->getActiveSheet()->setCellValue('AF3', 'ALAMAT LENGKAP WALI');
+
         $objPHPExcel->getActiveSheet()->setCellValue('AG3', 'TAHUN LULUS SMTA');
         $objPHPExcel->getActiveSheet()->setCellValue('AH3', 'JURUSAN SMTA');
         $objPHPExcel->getActiveSheet()->setCellValue('AI3', 'JENIS SMTA');
@@ -1060,7 +1084,11 @@ class Admin extends CI_Controller
             $objPHPExcel->getActiveSheet()->setCellValue('B' . $baris, $data->no_pendaftaran);
             $objPHPExcel->getActiveSheet()->setCellValue('C' . $baris, $data->jalur_seleksi);
             $objPHPExcel->getActiveSheet()->setCellValue('D' . $baris, $data->nama_prodi);
-            $objPHPExcel->getActiveSheet()->setCellValue('E' . $baris, $data->jenis_kelamin);
+            if ($data->jenis_kelamin == 1) {
+                $objPHPExcel->getActiveSheet()->setCellValue('E' . $baris, "Laki - Laki");
+            } else {
+                $objPHPExcel->getActiveSheet()->setCellValue('E' . $baris, "Perempuan");
+            }
             $objPHPExcel->getActiveSheet()->setCellValue('F' . $baris, $data->provinsi_tempat_lahir);
             $objPHPExcel->getActiveSheet()->setCellValue('G' . $baris, $data->tempat_lahir);
             $objPHPExcel->getActiveSheet()->setCellValue('H' . $baris, $data->tanggal_lahir);
@@ -1072,49 +1100,315 @@ class Admin extends CI_Controller
             $objPHPExcel->getActiveSheet()->setCellValue('N' . $baris, $data->kode_pos);
             $objPHPExcel->getActiveSheet()->setCellValue('O' . $baris, $data->kewarganegaraan);
             $objPHPExcel->getActiveSheet()->setCellValue('P' . $baris, $data->status_pernikahan);
-            $objPHPExcel->getActiveSheet()->setCellValue('Q' . $baris, $data->telepon_ortu);
-            $objPHPExcel->getActiveSheet()->setCellValue('R' . $baris, $data->nama_ayah);
-            $objPHPExcel->getActiveSheet()->setCellValue('S' . $baris, $data->pendidikan_terakhir_ayah);
-            $objPHPExcel->getActiveSheet()->setCellValue('T' . $baris, $data->pekerjaan_ayah);
-            $objPHPExcel->getActiveSheet()->setCellValue('U' . $baris, $data->penghasilan_ayah);
-            $objPHPExcel->getActiveSheet()->setCellValue('V' . $baris, $data->nama_ibu);
-            $objPHPExcel->getActiveSheet()->setCellValue('W' . $baris, $data->pendidikan_terakhir_ibu);
-            $objPHPExcel->getActiveSheet()->setCellValue('X' . $baris, $data->pekerjaan_ibu);
-            $objPHPExcel->getActiveSheet()->setCellValue('Y' . $baris, $data->penghasilan_ibu);
-            $objPHPExcel->getActiveSheet()->setCellValue('Z' . $baris, $data->alamat_lengkap_ortu);
-            $objPHPExcel->getActiveSheet()->setCellValue('AA' . $baris, $data->id_provinsi_asal_ortu);
-            $objPHPExcel->getActiveSheet()->setCellValue('AB' . $baris, $data->id_kabupaten_ortu);
-            $objPHPExcel->getActiveSheet()->setCellValue('AC' . $baris, $data->kode_pos_ortu);
-            $objPHPExcel->getActiveSheet()->setCellValue('AD' . $baris, $data->nama_wali);
-            $objPHPExcel->getActiveSheet()->setCellValue('AE' . $baris, $data->pekerjaan_wali);
-            $objPHPExcel->getActiveSheet()->setCellValue('AF' . $baris, $data->alamat_lengkap_wali);
-            $objPHPExcel->getActiveSheet()->setCellValue('AG' . $baris, $data->tahun_lulus);
-            $objPHPExcel->getActiveSheet()->setCellValue('AH' . $baris, $data->jurusan);
-            $objPHPExcel->getActiveSheet()->setCellValue('AI' . $baris, $data->jenis_sekolah);
-            $objPHPExcel->getActiveSheet()->setCellValue('AJ' . $baris, $data->nama_sekolah);
-            $objPHPExcel->getActiveSheet()->setCellValue('AK' . $baris, $data->id_provinsi);
-            $objPHPExcel->getActiveSheet()->setCellValue('AL' . $baris, $data->alamat_lengkap_sekolah);
-            $objPHPExcel->getActiveSheet()->setCellValue('AM' . $baris, $data->status_kelulusan);
-            $objPHPExcel->getActiveSheet()->setCellValue('AN' . $baris, $data->no_ijazah);
-            $objPHPExcel->getActiveSheet()->setCellValue('AO' . $baris, $data->tgl_ijazah);
-            $objPHPExcel->getActiveSheet()->setCellValue('AP' . $baris, '0');
-            $objPHPExcel->getActiveSheet()->setCellValue('AQ' . $baris, '0');
-            $objPHPExcel->getActiveSheet()->setCellValue('AR' . $baris, '0');
-            $objPHPExcel->getActiveSheet()->setCellValue('AS' . $baris, '0');
-            $objPHPExcel->getActiveSheet()->setCellValue('AT' . $baris, '0');
-            $objPHPExcel->getActiveSheet()->setCellValue('AU' . $baris, '0');
-            $objPHPExcel->getActiveSheet()->setCellValue('AV' . $baris, '0');
-            $objPHPExcel->getActiveSheet()->setCellValue('AW' . $baris, '0');
-            $objPHPExcel->getActiveSheet()->setCellValue('AX' . $baris, '0');
-            $objPHPExcel->getActiveSheet()->setCellValue('AY' . $baris, $data->bhs_indonesia);
-            $objPHPExcel->getActiveSheet()->setCellValue('AZ' . $baris, $data->bhs_inggris);
-            $objPHPExcel->getActiveSheet()->setCellValue('BA' . $baris, $data->matematika);
+            $x++;
+            $baris++;
+        }
+        $baris1 = 4;
+        foreach ($ortu as $ot) {
+            $objPHPExcel->getActiveSheet()->setCellValue('Q' . $baris1, $ot->telepon_ortu);
+            $objPHPExcel->getActiveSheet()->setCellValue('R' . $baris1, $ot->nama_ayah);
+            $objPHPExcel->getActiveSheet()->setCellValue('S' . $baris1, $ot->pendidikan_terakhir_ayah);
+            $objPHPExcel->getActiveSheet()->setCellValue('T' . $baris1, $ot->pekerjaan_ayah);
+            $objPHPExcel->getActiveSheet()->setCellValue('U' . $baris1, $ot->penghasilan_ayah);
+            $objPHPExcel->getActiveSheet()->setCellValue('V' . $baris1, $ot->nama_ibu);
+            $objPHPExcel->getActiveSheet()->setCellValue('W' . $baris1, $ot->pendidikan_terakhir_ibu);
+            $objPHPExcel->getActiveSheet()->setCellValue('X' . $baris1, $ot->pekerjaan_ibu);
+            $objPHPExcel->getActiveSheet()->setCellValue('Y' . $baris1, $ot->penghasilan_ibu);
+            $objPHPExcel->getActiveSheet()->setCellValue('Z' . $baris1, $ot->alamat_lengkap_ortu);
+            $objPHPExcel->getActiveSheet()->setCellValue('AA' . $baris1, $ot->nama_provinsi);
+            $objPHPExcel->getActiveSheet()->setCellValue('AB' . $baris1, $ot->kabupaten);
+            $objPHPExcel->getActiveSheet()->setCellValue('AC' . $baris1, $ot->kode_pos_ortu);
+            $objPHPExcel->getActiveSheet()->setCellValue('AD' . $baris1, $ot->nama_wali);
+            $objPHPExcel->getActiveSheet()->setCellValue('AE' . $baris1, $ot->pekerjaan_wali);
+            $objPHPExcel->getActiveSheet()->setCellValue('AF' . $baris1, $ot->alamat_lengkap_wali);
+            $baris1++;
+        }
 
+        $baris2 = 4;
+        foreach ($sekolah as $skl) {
+            $objPHPExcel->getActiveSheet()->setCellValue('AG' . $baris2, $skl->tahun_lulus);
+            $objPHPExcel->getActiveSheet()->setCellValue('AH' . $baris2, $skl->jurusan);
+            $objPHPExcel->getActiveSheet()->setCellValue('AI' . $baris2, $skl->jenis_sekolah);
+            $objPHPExcel->getActiveSheet()->setCellValue('AJ' . $baris2, $skl->nama_sekolah);
+            $objPHPExcel->getActiveSheet()->setCellValue('AK' . $baris2, $skl->nama_provinsi);
+            $objPHPExcel->getActiveSheet()->setCellValue('AL' . $baris2, $skl->alamat_lengkap_sekolah);
+            if ($skl->status_kelulusan == 1) {
+                $objPHPExcel->getActiveSheet()->setCellValue('AM' . $baris2, "Sudah Lulus");
+            } else {
+                $objPHPExcel->getActiveSheet()->setCellValue('AM' . $baris2, "Belum Lulus");
+            }
+            $objPHPExcel->getActiveSheet()->setCellValue('AN' . $baris2, $skl->no_ijazah);
+            $objPHPExcel->getActiveSheet()->setCellValue('AO' . $baris2, $skl->tgl_ijazah);
+            $objPHPExcel->getActiveSheet()->setCellValue('AP' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AQ' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AR' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AS' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AT' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AU' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AV' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AW' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AX' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AY' . $baris2, $skl->bhs_indonesia);
+            $objPHPExcel->getActiveSheet()->setCellValue('AZ' . $baris2, $skl->bhs_inggris);
+            $objPHPExcel->getActiveSheet()->setCellValue('BA' . $baris2, $skl->matematika);
+        }
+
+
+
+        $filename = "Data-Mahasiswa" . date("d-m-Y") . '.xlsx';
+
+        $objPHPExcel->getActiveSheet()->setTitle("Data Mahasiswa");
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+
+        $writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $writer->save('php://output');
+
+        exit;
+    }
+    public function export_excel_tidak_lulus()
+    {
+        $data['data_mhs'] = $this->db->query('SELECT *
+                            FROM user
+                            LEFT JOIN pendaftar
+                            ON pendaftar.`id_user_calon_mhs` = user.`id`
+                            LEFT JOIN provinsi
+                            ON pendaftar.`id_provinsi` = provinsi.`id`
+                            LEFT JOIN kabupaten
+                            ON pendaftar.`id_kabupaten` = kabupaten.`id`
+                            LEFT JOIN kecamatan
+                            ON pendaftar.`id_kecamatan` = kecamatan.`id`
+                            LEFT JOIN prodi
+                            ON pendaftar.`id_prodi` = prodi.`id`
+                            WHERE user.`role_id` = 4
+                            AND pendaftar.id_pengumuman = 2')->result();
+
+        $ortu = $this->db->query('SELECT *
+                FROM user
+                LEFT JOIN data_ortu
+                ON data_ortu.`id_user_calon_mhs` = user.`id`
+                LEFT JOIN provinsi
+                ON provinsi.`id` = data_ortu.`id_provinsi_asal_ortu`
+                LEFT JOIN kabupaten
+                ON kabupaten.`id` = data_ortu.`id_kabupaten_ortu`
+                INNER JOIN pendaftar
+                ON pendaftar.`id_user_calon_mhs` = user.`id`
+                WHERE user.`role_id` = 4
+                AND pendaftar.id_pengumuman = 2')->result();
+
+        $sekolah = $this->db->query('SELECT * 
+                    FROM user
+                    LEFT JOIN detail_sekolah
+                    ON user.id = detail_sekolah.`id_user_calon_mhs`
+                    LEFT JOIN provinsi
+                    ON detail_sekolah.`id_provinsi` = provinsi.`id`
+                    INNER JOIN pendaftar
+                    ON pendaftar.`id_user_calon_mhs` = user.`id`
+                    WHERE user.`role_id` = 4
+                    AND pendaftar.id_pengumuman = 2')->result();
+
+        require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel.php');
+        require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("Admin");
+        $objPHPExcel->getProperties()->setLastModifiedBy("Admin");
+        $objPHPExcel->getProperties()->setTitle("Data Calon Mahasiswa Tidak Lulus");
+        $objPHPExcel->getProperties()->setSubject("");
+        $objPHPExcel->getProperties()->setDescription("");
+
+        $objPHPExcel->setActiveSheetIndex(0);
+
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Data Calon Mahasiswa Lulus')->mergeCells('A1:BA2')->getStyle()->getFont()->setSize(26)->setBold(true);
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Data Calon Mahasiswa Lulus')->mergeCells('A1:BA2')->getStyle()->getAlignment('A1')->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->getActiveSheet()->setCellValue('A3', 'NO');
+        $objPHPExcel->getActiveSheet()->setCellValue('B3', 'NO PENDAFTAR');
+        $objPHPExcel->getActiveSheet()->setCellValue('C3', 'JALUR SELEKSI');
+        $objPHPExcel->getActiveSheet()->setCellValue('D3', 'PRODI');
+        $objPHPExcel->getActiveSheet()->setCellValue('E3', 'JENIS KELAMIN');
+        $objPHPExcel->getActiveSheet()->setCellValue('F3', 'PROVINSI TEMPAT LAHIR');
+        $objPHPExcel->getActiveSheet()->setCellValue('G3', 'TEMPAT LAHIR');
+        $objPHPExcel->getActiveSheet()->setCellValue('H3', 'TGL LAHIR');
+        $objPHPExcel->getActiveSheet()->setCellValue('I3', 'TELP/WA');
+        $objPHPExcel->getActiveSheet()->setCellValue('J3', 'EMAIL');
+        $objPHPExcel->getActiveSheet()->setCellValue('K3', 'AGAMA');
+        $objPHPExcel->getActiveSheet()->setCellValue('L3', 'ALAMAT');
+        $objPHPExcel->getActiveSheet()->setCellValue('M3', 'KECAMATAN TEMPAT TINGGAL');
+        $objPHPExcel->getActiveSheet()->setCellValue('N3', 'KODE POS TEMPAT TINGGAL');
+        $objPHPExcel->getActiveSheet()->setCellValue('O3', 'KEWARGANEGARAAN');
+        $objPHPExcel->getActiveSheet()->setCellValue('P3', 'STATUS PERNIKAHAN');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('Q3', 'NO TELEPON ORANG TUA');
+        $objPHPExcel->getActiveSheet()->setCellValue('R3', 'NAMA AYAH');
+        $objPHPExcel->getActiveSheet()->setCellValue('S3', 'PENDIDIKAN TERAKHIR AYAH');
+        $objPHPExcel->getActiveSheet()->setCellValue('T3', 'PEKERJAAN AYAH');
+        $objPHPExcel->getActiveSheet()->setCellValue('U3', 'PENGHASILAN AYAH');
+        $objPHPExcel->getActiveSheet()->setCellValue('V3', 'NAMA IBU');
+        $objPHPExcel->getActiveSheet()->setCellValue('W3', 'PENDIDIKAN TERAKHIR IBU');
+        $objPHPExcel->getActiveSheet()->setCellValue('X3', 'PEKERJAAN IBU');
+        $objPHPExcel->getActiveSheet()->setCellValue('Y3', 'PENGHASILAN IBU');
+        $objPHPExcel->getActiveSheet()->setCellValue('Z3', 'ALAMAT ORANG TUA');
+        $objPHPExcel->getActiveSheet()->setCellValue('AA3', 'PROVINSI ASAL ORANG TUA');
+        $objPHPExcel->getActiveSheet()->setCellValue('AB3', 'KOTA/KABUPATEN ORANG TUA');
+        $objPHPExcel->getActiveSheet()->setCellValue('AC3', 'KODE POS ALAMAT ORANG TUA');
+        $objPHPExcel->getActiveSheet()->setCellValue('AD3', 'NAMA WALI');
+        $objPHPExcel->getActiveSheet()->setCellValue('AE3', 'PEKERJAAN WALI');
+        $objPHPExcel->getActiveSheet()->setCellValue('AF3', 'ALAMAT LENGKAP WALI');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('AG3', 'TAHUN LULUS SMTA');
+        $objPHPExcel->getActiveSheet()->setCellValue('AH3', 'JURUSAN SMTA');
+        $objPHPExcel->getActiveSheet()->setCellValue('AI3', 'JENIS SMTA');
+        $objPHPExcel->getActiveSheet()->setCellValue('AJ3', 'NAMA SMTA');
+        $objPHPExcel->getActiveSheet()->setCellValue('AK3', 'PROVINSI ASAL SMTA');
+        $objPHPExcel->getActiveSheet()->setCellValue('AL3', 'ALAMAT LENGKAP SMTA');
+        $objPHPExcel->getActiveSheet()->setCellValue('AM3', 'STATUS KELULUSAN');
+        $objPHPExcel->getActiveSheet()->setCellValue('AN3', 'NO IJAZAH SMTA');
+        $objPHPExcel->getActiveSheet()->setCellValue('AO3', 'TANGGAL IJAZAH SMTA');
+        $objPHPExcel->getActiveSheet()->setCellValue('AP3', 'NILAI BHS INDONESIA (SMT III)');
+        $objPHPExcel->getActiveSheet()->setCellValue('AQ3', 'NILAI BHS INGGRIS (SMT III)');
+        $objPHPExcel->getActiveSheet()->setCellValue('AR3', 'NILAI MATEMATIKA (SMT III)');
+        $objPHPExcel->getActiveSheet()->setCellValue('AS3', 'NILAI BHS INDONESIA (SMT IV)');
+        $objPHPExcel->getActiveSheet()->setCellValue('AT3', 'NILAI BHS INGGRIS (SMT IV)');
+        $objPHPExcel->getActiveSheet()->setCellValue('AU3', 'NILAI MATEMATIKA (SMT IV)');
+        $objPHPExcel->getActiveSheet()->setCellValue('AV3', 'NILAI BHS INDONESIA (SMT V)');
+        $objPHPExcel->getActiveSheet()->setCellValue('AW3', 'NILAI BHS INGGRIS (SMT V)');
+        $objPHPExcel->getActiveSheet()->setCellValue('AX3', 'NILAI MATEMATIKA (SMT V)');
+        $objPHPExcel->getActiveSheet()->setCellValue('AY3', 'NILAI UN BHS INDONESIA');
+        $objPHPExcel->getActiveSheet()->setCellValue('AZ3', 'NILAI UN BHS INGGRIS');
+        $objPHPExcel->getActiveSheet()->setCellValue('BA3', 'NILAI UN MATEMATIKA');
+
+        $baris = 4;
+        $x = 1;
+
+        foreach ($data['data_mhs'] as $data) {
+            $objPHPExcel->getActiveSheet()->setCellValue('A' . $baris, $x);
+            $objPHPExcel->getActiveSheet()->setCellValue('B' . $baris, $data->no_pendaftaran);
+            $objPHPExcel->getActiveSheet()->setCellValue('C' . $baris, $data->jalur_seleksi);
+            $objPHPExcel->getActiveSheet()->setCellValue('D' . $baris, $data->nama_prodi);
+            if ($data->jenis_kelamin == 1) {
+                $objPHPExcel->getActiveSheet()->setCellValue('E' . $baris, "Laki - Laki");
+            } else {
+                $objPHPExcel->getActiveSheet()->setCellValue('E' . $baris, "Perempuan");
+            }
+            $objPHPExcel->getActiveSheet()->setCellValue('F' . $baris, $data->provinsi_tempat_lahir);
+            $objPHPExcel->getActiveSheet()->setCellValue('G' . $baris, $data->tempat_lahir);
+            $objPHPExcel->getActiveSheet()->setCellValue('H' . $baris, $data->tanggal_lahir);
+            $objPHPExcel->getActiveSheet()->setCellValue('I' . $baris, $data->telepon);
+            $objPHPExcel->getActiveSheet()->setCellValue('J' . $baris, $data->email);
+            $objPHPExcel->getActiveSheet()->setCellValue('K' . $baris, $data->agama);
+            $objPHPExcel->getActiveSheet()->setCellValue('L' . $baris, $data->alamat);
+            $objPHPExcel->getActiveSheet()->setCellValue('M' . $baris, $data->nama_kecamatan);
+            $objPHPExcel->getActiveSheet()->setCellValue('N' . $baris, $data->kode_pos);
+            $objPHPExcel->getActiveSheet()->setCellValue('O' . $baris, $data->kewarganegaraan);
+            $objPHPExcel->getActiveSheet()->setCellValue('P' . $baris, $data->status_pernikahan);
+            $x++;
+            $baris++;
+        }
+        $baris1 = 4;
+        foreach ($ortu as $ot) {
+            $objPHPExcel->getActiveSheet()->setCellValue('Q' . $baris1, $ot->telepon_ortu);
+            $objPHPExcel->getActiveSheet()->setCellValue('R' . $baris1, $ot->nama_ayah);
+            $objPHPExcel->getActiveSheet()->setCellValue('S' . $baris1, $ot->pendidikan_terakhir_ayah);
+            $objPHPExcel->getActiveSheet()->setCellValue('T' . $baris1, $ot->pekerjaan_ayah);
+            $objPHPExcel->getActiveSheet()->setCellValue('U' . $baris1, $ot->penghasilan_ayah);
+            $objPHPExcel->getActiveSheet()->setCellValue('V' . $baris1, $ot->nama_ibu);
+            $objPHPExcel->getActiveSheet()->setCellValue('W' . $baris1, $ot->pendidikan_terakhir_ibu);
+            $objPHPExcel->getActiveSheet()->setCellValue('X' . $baris1, $ot->pekerjaan_ibu);
+            $objPHPExcel->getActiveSheet()->setCellValue('Y' . $baris1, $ot->penghasilan_ibu);
+            $objPHPExcel->getActiveSheet()->setCellValue('Z' . $baris1, $ot->alamat_lengkap_ortu);
+            $objPHPExcel->getActiveSheet()->setCellValue('AA' . $baris1, $ot->nama_provinsi);
+            $objPHPExcel->getActiveSheet()->setCellValue('AB' . $baris1, $ot->kabupaten);
+            $objPHPExcel->getActiveSheet()->setCellValue('AC' . $baris1, $ot->kode_pos_ortu);
+            $objPHPExcel->getActiveSheet()->setCellValue('AD' . $baris1, $ot->nama_wali);
+            $objPHPExcel->getActiveSheet()->setCellValue('AE' . $baris1, $ot->pekerjaan_wali);
+            $objPHPExcel->getActiveSheet()->setCellValue('AF' . $baris1, $ot->alamat_lengkap_wali);
+            $baris1++;
+        }
+
+        $baris2 = 4;
+        foreach ($sekolah as $skl) {
+            $objPHPExcel->getActiveSheet()->setCellValue('AG' . $baris2, $skl->tahun_lulus);
+            $objPHPExcel->getActiveSheet()->setCellValue('AH' . $baris2, $skl->jurusan);
+            $objPHPExcel->getActiveSheet()->setCellValue('AI' . $baris2, $skl->jenis_sekolah);
+            $objPHPExcel->getActiveSheet()->setCellValue('AJ' . $baris2, $skl->nama_sekolah);
+            $objPHPExcel->getActiveSheet()->setCellValue('AK' . $baris2, $skl->nama_provinsi);
+            $objPHPExcel->getActiveSheet()->setCellValue('AL' . $baris2, $skl->alamat_lengkap_sekolah);
+            if ($skl->status_kelulusan == 1) {
+                $objPHPExcel->getActiveSheet()->setCellValue('AM' . $baris2, "Sudah Lulus");
+            } else {
+                $objPHPExcel->getActiveSheet()->setCellValue('AM' . $baris2, "Belum Lulus");
+            }
+            $objPHPExcel->getActiveSheet()->setCellValue('AN' . $baris2, $skl->no_ijazah);
+            $objPHPExcel->getActiveSheet()->setCellValue('AO' . $baris2, $skl->tgl_ijazah);
+            $objPHPExcel->getActiveSheet()->setCellValue('AP' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AQ' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AR' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AS' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AT' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AU' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AV' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AW' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AX' . $baris2, '0');
+            $objPHPExcel->getActiveSheet()->setCellValue('AY' . $baris2, $skl->bhs_indonesia);
+            $objPHPExcel->getActiveSheet()->setCellValue('AZ' . $baris2, $skl->bhs_inggris);
+            $objPHPExcel->getActiveSheet()->setCellValue('BA' . $baris2, $skl->matematika);
+        }
+
+
+
+        $filename = "Data-Mahasiswa" . date("d-m-Y") . '.xlsx';
+
+        $objPHPExcel->getActiveSheet()->setTitle("Data Mahasiswa");
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+
+        $writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $writer->save('php://output');
+
+        exit;
+    }
+    public function export_belum_final()
+    {
+        $data['data_mhs'] = $this->db->query('SELECT * FROM user WHERE user.role_id = 4')->result();
+
+        require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel.php');
+        require(APPPATH . 'PHPExcel-1.8/Classes/PHPExcel/Writer/Excel2007.php');
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->getProperties()->setCreator("Admin");
+        $objPHPExcel->getProperties()->setLastModifiedBy("Admin");
+        $objPHPExcel->getProperties()->setTitle("Data Calon Mahasiswa Belum Final");
+        $objPHPExcel->getProperties()->setSubject("");
+        $objPHPExcel->getProperties()->setDescription("");
+
+        $objPHPExcel->setActiveSheetIndex(0);
+
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Data Calon Mahasiswa Belum Final')->mergeCells('A1:E2')->getStyle()->getFont()->setSize(14)->setBold(true);
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Data Calon Mahasiswa Belum Final')->mergeCells('A1:E2')->getStyle()->getAlignment('A1')->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER)->setVERTICAL(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $objPHPExcel->getActiveSheet()->setCellValue('A3', 'NO');
+        $objPHPExcel->getActiveSheet()->setCellValue('B3', 'NAMA LENGKAP');
+        $objPHPExcel->getActiveSheet()->setCellValue('C3', 'NIK');
+        $objPHPExcel->getActiveSheet()->setCellValue('D3', 'NO WA');
+        $objPHPExcel->getActiveSheet()->setCellValue('E3', 'EMAIL');
+
+        $baris = 4;
+        $x = 1;
+
+        foreach ($data['data_mhs'] as $data) {
+            $objPHPExcel->getActiveSheet()->setCellValue('A' . $baris, $x);
+            $objPHPExcel->getActiveSheet()->setCellValue('B' . $baris, $data->nama_lengkap);
+            $objPHPExcel->getActiveSheet()->setCellValue('C' . $baris, $data->nik);
+            $objPHPExcel->getActiveSheet()->setCellValue('D' . $baris, $data->no_whatsapp);
+            $objPHPExcel->getActiveSheet()->setCellValue('E' . $baris, $data->email);
             $x++;
             $baris++;
         }
 
-        $filename = "Data-Mahasiswa" . date("d-m-Y-H-i-s") . '.xlsx';
+        $filename = "Data-Mahasiswa-Belum-Final" . date("d-m-Y") . '.xlsx';
 
         $objPHPExcel->getActiveSheet()->setTitle("Data Mahasiswa");
 
