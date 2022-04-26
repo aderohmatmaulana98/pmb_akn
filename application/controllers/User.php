@@ -27,6 +27,18 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $id_user = $data['user']['id'];
 
+        $role_id = $data['user']['role_id'];
+
+        if ($data['user']['no_slip'] == NULL && $data['user']['bukti_bayar'] == NULL && $role_id == 4) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Isi bukti bayar terlebih dahulu ! </div>');
+            redirect('user/bayar');
+        }
+
+        if ($data['user']['no_slip'] != null && $data['user']['bukti_bayar'] != null && $data['user']['status_bayar'] == NULL && $role_id == 4) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Tunggu verifikasi pembayaran ! </div>');
+            redirect('user/tunggu');
+        }
+
         $data['provinsi'] = $this->base_model->getDataProv();
         $data['prodi'] = $this->db->get('prodi')->result_array();
         $data['sekolah'] = $this->db->get('sekolah')->result_array();
@@ -529,6 +541,11 @@ class User extends CI_Controller
         $role_id = $data['user']['role_id'];
         $cek_isi = $data['user']['cek_isi'];
 
+        if ($data['user']['no_slip'] != null && $data['user']['bukti_bayar'] != null && $data['user']['status_bayar'] == NULL && $role_id == 4) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Tunggu verifikasi pembayaran ! </div>');
+            redirect('user/tunggu');
+        }
+
         if ($cek_isi == 0 && $role_id == 4) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Isi formulir terlebih dahulu ! </div>');
             redirect('user/formulir');
@@ -553,6 +570,11 @@ class User extends CI_Controller
 
         $role_id = $data['user']['role_id'];
         $cek_isi = $data['user']['cek_isi'];
+
+        if ($data['user']['no_slip'] != null && $data['user']['bukti_bayar'] != null && $data['user']['status_bayar'] == NULL && $role_id == 4) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Tunggu verifikasi pembayaran ! </div>');
+            redirect('user/tunggu');
+        }
 
         if ($cek_isi == 0 && $role_id == 4) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Isi formulir terlebih dahulu ! </div>');
@@ -608,6 +630,16 @@ class User extends CI_Controller
         $role_id = $data['user']['role_id'];
         $cek_isi = $data['user']['cek_isi'];
         $user_id = $data['user']['id'];
+
+        if ($data['user']['no_slip'] == NULL && $data['user']['bukti_bayar'] == NULL && $role_id == 4) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Isi bukti bayar terlebih dahulu ! </div>');
+            redirect('user/bayar');
+        }
+
+        if ($data['user']['no_slip'] != null && $data['user']['bukti_bayar'] != null && $data['user']['status_bayar'] == NULL && $role_id == 4) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Tunggu verifikasi pembayaran ! </div>');
+            redirect('user/tunggu');
+        }
 
         if ($cek_isi == 0 && $role_id == 4) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"> Isi formulir terlebih dahulu ! </div>');
@@ -677,6 +709,69 @@ class User extends CI_Controller
         $this->load->view('template/sidebar', $data);
         $this->load->view('template/topbar', $data);
         $this->load->view('user/detail_formulir', $data);
+        $this->load->view('template/footer');
+    }
+    public function bayar()
+    {
+        $data['title'] = 'Pembayaran';
+
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('user/konfirmasi_pembayaran', $data);
+        $this->load->view('template/footer');
+    }
+    public function aksi_bayar()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $id_user = $data['user']['id'];
+        $no_slip = $this->input->post('no_slip');
+        $bukti_bayar = $_FILES['bukti_bayar'];
+
+        if ($bukti_bayar = '') {
+            # code...
+        } else {
+            $config['upload_path'] = './assets/img/bukti_bayar';
+            $config['allowed_types'] = 'png|jpg|jpeg|gif';
+
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            if (!$this->upload->do_upload('bukti_bayar')) {
+                echo "Upload Gagal";
+                die();
+            } else {
+                $bukti_bayar = $this->upload->data('file_name');
+            }
+        }
+
+
+        $data = [
+            'no_slip' => $no_slip,
+            'bukti_bayar' => $bukti_bayar,
+            'status_bayar' => 0,
+
+        ];
+
+        $sql = "UPDATE user SET user.no_slip='$no_slip', user.bukti_bayar='$bukti_bayar' 
+		WHERE user.id=$id_user";
+
+        $this->db->query($sql);
+
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Bukti bayar berhasil di simpan. </div>');
+        redirect('user/tunggu');
+    }
+    public function tunggu()
+    {
+        $data['title'] = 'Tunggu';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('user/tunggu', $data);
         $this->load->view('template/footer');
     }
 }

@@ -1421,4 +1421,38 @@ class Admin extends CI_Controller
 
         exit;
     }
+    public function verifikasi_bayar()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Verifikasi Bayar';
+
+        $sql = "SELECT * FROM `th_ajaran`";
+
+        $data['tahun_ajaran'] = $this->db->query($sql)->result_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('admin/verifikasi_bayar', $data);
+        $this->load->view('template/footer');
+    }
+    public function detail_verifikasi($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Detail Verifikasi Pembayaran';
+
+        $sql = "SELECT user.id, user.nama_lengkap, user.`no_slip`,user.`bukti_bayar`
+        FROM USER, th_ajaran, pendaftar
+        WHERE pendaftar.`id_th_ajaran` = th_ajaran.`id`
+        AND user.`id` = pendaftar.`id_user_calon_mhs`
+        AND `th_ajaran`.`id` = $id";
+
+        $data['detail_verifikasi'] = $this->db->query($sql)->result_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('admin/detail_verifikasi', $data);
+        $this->load->view('template/footer');
+    }
 }

@@ -28,6 +28,9 @@ class Auth extends CI_Controller
 
         $user = $this->db->get_where('user', ['email' => $email])->row_array();
 
+        $no_slip = $user['no_slip'];
+        $bukti_bayar = $user['bukti_bayar'];
+
         if ($user) {
 
             if ($user['is_active'] == 1) {
@@ -43,7 +46,16 @@ class Auth extends CI_Controller
                     } elseif ($user['role_id'] == 3) {
                         redirect('penyeleksi');
                     } else {
-                        redirect('user/formulir');
+                        if ($user['status_bayar'] == 0) {
+                            if ($no_slip != null && $bukti_bayar != null) {
+                                redirect('user/tunggu');
+                            } else {
+
+                                redirect('user/bayar');
+                            }
+                        } else {
+                            redirect('user/formulir');
+                        }
                     }
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah</div>');
@@ -57,7 +69,7 @@ class Auth extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
 			Email tidak terdaftar !
 		  </div>');
-          redirect('auth');
+            redirect('auth');
         }
     }
 
