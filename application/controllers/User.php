@@ -464,6 +464,21 @@ class User extends CI_Controller
         $sql1 = "UPDATE user SET user.cek_isi = 1 WHERE user.id = $id_user_calon_mhs";
         $this->db->query($sql1);
 
+        $sql2 = "SELECT pendaftar.id 
+        FROM USER, pendaftar
+        WHERE user.`id` = pendaftar.`id_user_calon_mhs`
+        AND user.`id` = $id_user_calon_mhs";
+
+        $id_pendaftar = $this->db->query($sql2)->row_array();
+        $id_pendaftar = $id_pendaftar['id'];
+
+        $sql = "UPDATE pendaftar, user
+                SET pendaftar.status_finalisasi = 1
+                WHERE pendaftar.id_user_calon_mhs = user.id
+                AND user.id = $id_user_calon_mhs
+                AND pendaftar.id =  $id_pendaftar";
+        $this->db->query($sql);
+
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> Data orang tua berhasil disimpan. </div>');
         redirect('user/berhasil_daftar');
     }

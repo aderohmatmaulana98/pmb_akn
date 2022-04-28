@@ -46,7 +46,7 @@ class Auth extends CI_Controller
                     } elseif ($user['role_id'] == 3) {
                         redirect('penyeleksi');
                     } else {
-                        if ($user['status_bayar'] == 0) {
+                        if ($user['status_bayar'] == NULL) {
                             if ($no_slip != null && $bukti_bayar != null) {
                                 redirect('user/tunggu');
                             } else {
@@ -75,6 +75,12 @@ class Auth extends CI_Controller
 
     public function registration()
     {
+        $sql = "SELECT `th_ajaran`.`id` 
+        FROM `th_ajaran`
+        WHERE th_ajaran.`is_active` = 1";
+        $tahun_ajaran = $this->db->query($sql)->row_array();
+        $tahun_ajaran = $tahun_ajaran['id'];
+
         $this->form_validation->set_rules('nik', 'NIK', 'required|trim');
         $this->form_validation->set_rules('fullname', 'Nama Lengkap', 'required|trim');
         $this->form_validation->set_rules('no_wa', 'No Whatsapp', 'required|trim');
@@ -106,7 +112,8 @@ class Auth extends CI_Controller
                 'image' =>  'default.png',
                 'is_active' => 0,
                 'role_id' => 4,
-                'cek_isi' => 0
+                'cek_isi' => 0,
+                'id_th_ajaran' => $tahun_ajaran
             ];
 
             //siapkan token

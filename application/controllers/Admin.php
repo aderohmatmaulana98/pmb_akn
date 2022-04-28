@@ -1436,15 +1436,17 @@ class Admin extends CI_Controller
         $this->load->view('admin/verifikasi_bayar', $data);
         $this->load->view('template/footer');
     }
+
     public function detail_verifikasi($id)
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Detail Verifikasi Pembayaran';
 
-        $sql = "SELECT user.id, user.nama_lengkap, user.`no_slip`,user.`bukti_bayar`
-        FROM USER, th_ajaran, pendaftar
+        $sql = "SELECT user.id, user.nik, user.nama_lengkap, user.`no_slip`,user.`bukti_bayar`, th_ajaran.id as id_tahun_ajaran, user.status_bayar 
+        FROM user, th_ajaran, pendaftar
         WHERE pendaftar.`id_th_ajaran` = th_ajaran.`id`
         AND user.`id` = pendaftar.`id_user_calon_mhs`
+        AND user.`id_th_ajaran` = th_ajaran.`id`
         AND `th_ajaran`.`id` = $id";
 
         $data['detail_verifikasi'] = $this->db->query($sql)->result_array();
@@ -1454,5 +1456,53 @@ class Admin extends CI_Controller
         $this->load->view('template/topbar', $data);
         $this->load->view('admin/detail_verifikasi', $data);
         $this->load->view('template/footer');
+    }
+
+    public function konfirmasi($id_tahun_ajaran, $id)
+    {
+        $sql = "UPDATE user
+                SET user.status_bayar = 1
+                WHERE user.id = $id";
+
+        $this->db->query($sql);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-start" role="alert">
+        Status Berhasil diubah !!
+      </div>');
+        redirect("admin/detail_verifikasi/$id_tahun_ajaran");
+    }
+    public function batal_konfirmasi($id_tahun_ajaran, $id)
+    {
+        $sql = "UPDATE user
+                SET user.status_bayar = 0
+                WHERE user.id = $id";
+
+        $this->db->query($sql);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-start" role="alert">
+        Status Berhasil diubah !!
+      </div>');
+        redirect("admin/detail_verifikasi/$id_tahun_ajaran");
+    }
+    public function pembayaran()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title'] = 'Pembayaran';
+
+        $sql = "SELECT pembayaran.id, user.nik, user.`nama_lengkap`, pembayaran.`kode_transaksi`, th_ajaran.`tahun_ajaran`, total_pembayaran
+                FROM USER, pembayaran, th_ajaran
+                WHERE user.`id` = pembayaran.`id_user`
+                AND user.`id_th_ajaran` = th_ajaran.`id`";
+        $data['pembayaran'] = $this->db->query($sql)->row_array();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('template/header', $data);
+            $this->load->view('template/sidebar', $data);
+            $this->load->view('template/topbar', $data);
+            $this->load->view('admin/pembayaran', $data);
+            $this->load->view('template/footer');
+        } else {
+            # code...
+        }
     }
 }

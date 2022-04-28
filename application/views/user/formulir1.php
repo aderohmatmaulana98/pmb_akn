@@ -179,7 +179,7 @@
                                     <input class="form-control" type="file" id="pas_foto" name="pas_foto" required>
                                     <small>Upload file dengan format PNG/JPG dengan ukuran max 1 MB</small>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" onclick="javascript: return confirm('Dengan ini data yang saya isikan adalah benar. ')" class="btn btn-primary">Submit</button>
                             </form>
                             </div>
                             <?php if ($user['isi_biodata'] == 1 && $user['isi_sekolah_asal'] == 0) : ?>
@@ -266,7 +266,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" onclick="javascript: return confirm('Dengan ini data yang saya isikan adalah benar. ')" class="btn btn-primary">Submit</button>
                                     </form>
                                     </div>
                                     <?php if ($user['isi_sekolah_asal'] == 1 && $user['isi_prestasi'] == 0) : ?>
@@ -295,7 +295,7 @@
                                                     <input type="number" class="form-control" id="prestasi_juara_ke" name="prestasi_juara_ke">
                                                 </div>
                                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                                <a href="<?= base_url('user/prestasi_selesai') ?>" class="btn btn-danger">Selesai</a>
+                                                <a href="<?= base_url('user/prestasi_selesai') ?>" onclick="javascript: return confirm('Dengan ini data yang saya isikan adalah benar. ')" class="btn btn-danger">Selesai</a>
                                             </form>
                                             </div>
                                             <?php if ($user['isi_prestasi'] == 1 && $user['isi_data_ortu'] == 0) : ?>
@@ -407,7 +407,7 @@
                                                             <label for="alamat_lengkap_wali" class="form-label">Alamat Lengkap Wali</label>
                                                             <textarea name="alamat_lengkap_wali" class="form-control" id="alamat_lengkap_wali" cols="30" rows="10"></textarea>
                                                         </div>
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                        <button type="submit" onclick="javascript: return confirm('Dengan ini data yang saya isikan adalah benar.')" class="btn btn-primary">Submit</button>
                                                     </form>
                                                     </div>
                                                 </div>
