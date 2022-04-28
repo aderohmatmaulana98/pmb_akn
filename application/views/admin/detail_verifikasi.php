@@ -30,6 +30,7 @@
                                     <td><a href="<?= base_url('/assets/img/bukti_bayar/') . $dv['bukti_bayar'] ?>" class="btn bg-success text-white">Lihat</a></td>
                                     <td>
                                         <?php if ($dv['status_bayar'] == NULL || $dv['status_bayar'] == 0) : ?>
+<<<<<<< HEAD
                                             <a href="<?= base_url('admin/konfirmasi/') . $dv['id_tahun_ajaran'] . '/' . $dv['id'] ?>" class="btn badge bg-success text-white"><i data-feather="check" width="40"></i></a>
                                         <?php else : ?>
                                             <a href="<?= base_url('admin/batal_konfirmasi/') . $dv['id_tahun_ajaran'] . '/' . $dv['id'] ?>" class="btn badge bg-danger text-white"><i data-feather="x" width="40"></i></a>
@@ -37,6 +38,14 @@
 
                                         <!-- <a href="" class="btn bg-danger text-white"><i data-feather="trash-2" width="40"></i></a> -->
 										<a class="btn badge bg-danger" onclick="javascript: return confirm('Anda yakin akan menghapus ini? ')" href="<?= base_url('admin/delete_detail_verifikasi_pembayaran/' . $dv['id']) ?>"><Hapus data-feather="trash-2" width="40">Hapus</i></a>
+=======
+                                            <a href="<?= base_url('admin/konfirmasi/') . $dv['id_tahun_ajaran'] . '/' . $dv['id'] ?>" class="btn bg-success text-white"><i data-feather="check" width="40"></i></a>
+                                        <?php else : ?>
+                                            <a href="<?= base_url('admin/batal_konfirmasi/') . $dv['id_tahun_ajaran'] . '/' . $dv['id'] ?>" class="btn bg-danger text-white"><i data-feather="x" width="40"></i></a>
+                                        <?php endif; ?>
+
+                                        <a href="" class="btn bg-danger text-white"><i data-feather="trash-2" width="40"></i></a>
+>>>>>>> a4ec211828a96b2f662f82cf47a6aca8ab147643
                                     </td>
                                 </tr>
                             <?php $i++;
@@ -48,4 +57,8 @@
         </div>
     </section>
 </div>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> a4ec211828a96b2f662f82cf47a6aca8ab147643
