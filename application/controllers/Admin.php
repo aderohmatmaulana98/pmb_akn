@@ -225,6 +225,21 @@ class Admin extends CI_Controller
         redirect('admin/jadwal');
     }
 
+<<<<<<< HEAD
+	public function delete_detail_verifikasi_pembayaran($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('user');
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        Detail verifikasi pembayaran berhasil dihapus.
+      </div>');
+
+        redirect("admin/detail_verifikasi/$id");
+    }
+
+=======
+>>>>>>> a4ec211828a96b2f662f82cf47a6aca8ab147643
     public function data_calon_mahasiswa()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -390,6 +405,33 @@ class Admin extends CI_Controller
         }
     }
 
+<<<<<<< HEAD
+	public function edit_tahun_ajaran()
+    {
+		$tahun_ajaran = $this->input->post('tahun_ajaran');
+		$status = $this->input->post('status');
+      
+        $id = $this->input->post('id');
+
+        $data = [
+            'tahun_ajaran' => $tahun_ajaran,
+                'is_active' => $status,
+				'id' => $id
+        ];
+
+        $this->db->where('id', $id);
+        $this->db->update('th_ajaran', $data);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Tahun Ajaran berhasil diubah.
+		  </div>');
+
+        redirect('admin/tahun_ajaran');
+        }
+    
+
+=======
+>>>>>>> a4ec211828a96b2f662f82cf47a6aca8ab147643
     public function delete_tahun_ajaran($id)
     {
         $this->db->where('id', $id);
@@ -1442,12 +1484,33 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Detail Verifikasi Pembayaran';
 
+<<<<<<< HEAD
+		
+		// var_dump($id);
+		// die;
+
+		
+
+        // $sql = "SELECT user.id, user.nik, user.nama_lengkap, user.`no_slip`,user.`bukti_bayar`, th_ajaran.id as id_tahun_ajaran, user.status_bayar 
+        // FROM user, th_ajaran, pendaftar
+        // WHERE pendaftar.`id_th_ajaran` = th_ajaran.`id`
+        // AND user.`id` = pendaftar.`id_user_calon_mhs`
+        // AND user.`id_th_ajaran` = th_ajaran.`id`
+        // AND `th_ajaran`.`id` = $id";
+
+		$sql = "SELECT user.id, user.nik, user.nama_lengkap, user.`no_slip`,user.`bukti_bayar`,  th_ajaran.id AS id_tahun_ajaran, user.`status_bayar`
+        FROM USER, th_ajaran
+        WHERE user.`id_th_ajaran`  = th_ajaran.`id`
+        AND `user`.`id_th_ajaran` = $id
+		";
+=======
         $sql = "SELECT user.id, user.nik, user.nama_lengkap, user.`no_slip`,user.`bukti_bayar`, th_ajaran.id as id_tahun_ajaran, user.status_bayar 
         FROM user, th_ajaran, pendaftar
         WHERE pendaftar.`id_th_ajaran` = th_ajaran.`id`
         AND user.`id` = pendaftar.`id_user_calon_mhs`
         AND user.`id_th_ajaran` = th_ajaran.`id`
         AND `th_ajaran`.`id` = $id";
+>>>>>>> a4ec211828a96b2f662f82cf47a6aca8ab147643
 
         $data['detail_verifikasi'] = $this->db->query($sql)->result_array();
 

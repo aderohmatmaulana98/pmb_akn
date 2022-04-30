@@ -51,36 +51,103 @@
                 Penguji 1
                 <br><br><br><br>
             </td>
+<<<<<<< HEAD
+            <td width="50">
+=======
             <td width="440px">
+>>>>>>> a4ec211828a96b2f662f82cf47a6aca8ab147643
 
             </td>
             <td>
                 Penguji 2
                 <br><br><br><br>
             </td>
+<<<<<<< HEAD
+			<td width="50">
+
+</td>
+		
+			<td>
+                Penguji 3
+                <br><br><br><br>
+            </td>
+			<td width="45">
+
+</td>
+
+<td>
+                Penguji 4
+                <br><br><br><br>
+            </td>
+=======
+>>>>>>> a4ec211828a96b2f662f82cf47a6aca8ab147643
         </tr>
         <tr>
             <td>
                 <p style="line-height: 70%;">............................<hr></p>
             </td>
+<<<<<<< HEAD
+            <td width="50">
+=======
             <td width="440px">
+>>>>>>> a4ec211828a96b2f662f82cf47a6aca8ab147643
 
             </td>
             <td>
                 <p style="line-height: 70%;">............................<hr></p>
             </td>
+<<<<<<< HEAD
+			<td width="45">
+
+</td>
+			<td>
+                <p style="line-height: 70%;">............................<hr></p>
+            </td>
+			<td width="45">
+
+</td>
+
+			<td>
+                <p style="line-height: 70%;">............................<hr></p>
+            </td>
+=======
+>>>>>>> a4ec211828a96b2f662f82cf47a6aca8ab147643
         </tr>
         <tr>
             <td>
                 NIP.
             </td>
+<<<<<<< HEAD
+            <td width="50">
+=======
             <td width="440px">
+>>>>>>> a4ec211828a96b2f662f82cf47a6aca8ab147643
 
             </td>
             <td>
                 NIP.
             </td>
+<<<<<<< HEAD
+			<td width="50">
+
+</td>
+			<td>
+                NIP.
+            </td>
+			<td width="45">
+
+			<td>
+                NIP.
+            </td>
+
+</td>
         </tr>
         
     </table>
 </body></html>
+=======
+        </tr>
+        
+    </table>
+</body></html>
+>>>>>>> a4ec211828a96b2f662f82cf47a6aca8ab147643

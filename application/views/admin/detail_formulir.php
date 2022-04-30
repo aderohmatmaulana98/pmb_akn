@@ -454,7 +454,11 @@
                         </span>
                     <?php endif; ?>
                     <spa class="col-lg-4">
+<<<<<<< HEAD
+                        <a href="<?= base_url('admin/data_sudah_finalisasi'); ?>" class="btn btn-primary"><i data-feather="arrow-left"></i> Kembali</a>
+=======
                         <a href="<?= base_url('admin/data_belum_finalisasi'); ?>" class="btn btn-primary"><i data-feather="arrow-left"></i> Kembali</a>
+>>>>>>> a4ec211828a96b2f662f82cf47a6aca8ab147643
                     </spa>
                 </div>
             </div>
@@ -529,4 +533,8 @@
 
 <script>
     document.foo.submit();
+<<<<<<< HEAD
 </script>
+=======
+</script>
+>>>>>>> a4ec211828a96b2f662f82cf47a6aca8ab147643
