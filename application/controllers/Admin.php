@@ -1489,20 +1489,63 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['title'] = 'Pembayaran';
 
-        $sql = "SELECT pembayaran.id, user.nik, user.`nama_lengkap`, pembayaran.`kode_transaksi`, th_ajaran.`tahun_ajaran`, total_pembayaran
-                FROM USER, pembayaran, th_ajaran
+        $sql = "SELECT pembayaran.id, user.nik, user.`nama_lengkap`,pembayaran.angkatan, pembayaran.`kode_transaksi`, th_ajaran.`tahun_ajaran`, total_pembayaran
+                FROM user, pembayaran, th_ajaran
                 WHERE user.`id` = pembayaran.`id_user`
-                AND user.`id_th_ajaran` = th_ajaran.`id`";
-        $data['pembayaran'] = $this->db->query($sql)->row_array();
+                AND user.`id_th_ajaran` = th_ajaran.`id`
+                AND user.role_id = 4";
+        $data['pembayaran'] = $this->db->query($sql)->result_array();
 
-        if ($this->form_validation->run() == false) {
-            $this->load->view('template/header', $data);
-            $this->load->view('template/sidebar', $data);
-            $this->load->view('template/topbar', $data);
-            $this->load->view('admin/pembayaran', $data);
-            $this->load->view('template/footer');
-        } else {
-            # code...
+        $data['calon_mhs'] = $this->db->get_where('user', ['role_id' => 4])->result_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('template/sidebar', $data);
+        $this->load->view('template/topbar', $data);
+        $this->load->view('admin/pembayaran', $data);
+        $this->load->view('template/footer');
+    }
+
+    public function aksi_pembayaran()
+    {
+        $kode_transaksi = $this->db->query("SELECT MAX(pembayaran.`kode_transaksi`) as kode_bayar FROM pembayaran")->row_array();
+        $kode_transaksi = $kode_transaksi['kode_bayar'];
+        $urutan = (int) substr($kode_transaksi, 8, 4);
+        $urutan++;
+        $tanggal = date('dmY');
+        $kodeTransaksi = $tanggal . sprintf("%04s", $urutan);
+        $nik = $this->input->post('nik');
+        $angkatan = $this->input->post('angkatan');
+        $total_pembayaran = $this->input->post('total_pembayaran');
+
+        $cek_data = $this->db->query("SELECT COUNT(user.id) as jumlah FROM user WHERE user.nik = $nik")->row_array();
+        $cek_data = $cek_data['jumlah'];
+        $id_user = $this->db->query("SELECT user.id FROM user WHERE user.nik = $nik")->row_array();
+        $id_user = $id_user['id'];
+
+        $data = [
+            'kode_transaksi' => $kodeTransaksi,
+            'angkatan' => $angkatan,
+            'total_pembayaran' => $total_pembayaran,
+            'id_user' => $id_user
+        ];
+
+        if ($cek_data > 0) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger text-start" role="alert">
+        Data sudah ada !!
+      </div>');
+            redirect("admin/pembayaran");
         }
+
+        $this->db->insert('pembayaran', $data);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-start" role="alert">
+        Pembayaran berhasil ditambahkan !!
+      </div>');
+        redirect("admin/pembayaran");
+    }
+    public function cetak_pembayaran()
+    {
+        $data['pembayaran'] = $this->db->query("SELECT pembayaran.*, user.nama_lengkap, user.nik FROM user, pembayaran WHERE user.id = pembayaran.id_user")->row_array();
+        $this->load->view('admin/cetak_pembayaran', $data);
     }
 }
