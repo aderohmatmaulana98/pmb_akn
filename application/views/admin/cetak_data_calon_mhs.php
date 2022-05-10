@@ -28,9 +28,11 @@
             <th style="border: 1px solid black;" scope="col">NIK</th>
             <th style="border: 1px solid black;" scope="col">Nama</th>
             <th style="border: 1px solid black;" scope="col">Prodi</th>
+            <th style="border: 1px solid black;" scope="col">Gelombang</th>
             <th style="border: 1px solid black;" scope="col">Praktek</th>
             <th style="border: 1px solid black;" scope="col">Wawancara</th>
             <th style="border: 1px solid black;" scope="col">Skor</th>
+            <th style="border: 1px solid black;" scope="col">Hasil</th>
         </tr>
         <?php $i = 1; ?>
         <?php foreach ($data_calon_mahasiswa as $dcm) : ?>
@@ -39,9 +41,17 @@
                 <td style="border: 1px solid black;"><?= $dcm['nik'] ?></td>
                 <td style="border: 1px solid black;"><?= $dcm['nama_lengkap'] ?></td>
                 <td style="border: 1px solid black;"><?= $dcm['nama_prodi'] ?></td>
+                <td style="border: 1px solid black;"><?= $dcm['gelombang'] ?></td>
                 <td style="border: 1px solid black;"><?= $dcm['praktek'] ?></td>
                 <td style="border: 1px solid black;"><?= $dcm['wawancara'] ?></td>
                 <td style="border: 1px solid black;"><?= $dcm['skor'] ?></td>
+                <?php if($dcm['id_pengumuman'] == 1 ): ?>
+                <td style="border: 1px solid black;">Lulus</td>
+                <?php elseif($dcm['id_pengumuman'] == 2 ) :?>
+                <td style="border: 1px solid black;">Tidak Lulus</td>
+                <?php else:?>
+                    <td style="border: 1px solid black;"></td>
+                    <?php endif;?>
             </tr>
         <?php $i++; endforeach; ?>
     </table>

@@ -198,6 +198,57 @@
                         <input type="date" class="form-control" id="tgl_ijazah" value="<?php echo date("Y-m-d", strtotime($detail_sekolah['tgl_ijazah'])); ?>" name="tgl_ijazah" readonly required>
                     </div>
                     <div class="mb-3">
+                        <label for="data_nilai" class="form-label">Data Nilai Raport SMT III</label>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label for="bhs_indonesia_smt3" class="form-label">Bhs Indonesia</label>
+                                <input type="text" class="form-control" id="bhs_indonesia_smt3" name="bhs_indonesia_smt3" value="<?= $detail_sekolah['bhs_indo_smt3']; ?>" readonly required>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="bhs_inggris_smt3" class="form-label">Bhs Inggris</label>
+                                <input type="text" class="form-control" id="bhs_inggris_smt3" name="bhs_inggris_smt3" value="<?= $detail_sekolah['bhs_inggris_smt3']; ?>" readonly required>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="matematika_smt3" class="form-label">Matematika</label>
+                                <input type="text" class="form-control" id="matematika_smt3" name="matematika_smt3" value="<?= $detail_sekolah['matematika_smt3']; ?>" readonly required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="data_nilai" class="form-label">Data Nilai Raport SMT IV</label>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label for="bhs_indonesia_smt4" class="form-label">Bhs Indonesia</label>
+                                <input type="text" class="form-control" id="bhs_indonesia_smt4" name="bhs_indonesia_smt4" value="<?= $detail_sekolah['bhs_indo_smt4']; ?>" readonly required>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="bhs_inggris_smt4" class="form-label">Bhs Inggris</label>
+                                <input type="text" class="form-control" id="bhs_inggris_smt4" name="bhs_inggris_smt4" value="<?= $detail_sekolah['bhs_inggris_smt4']; ?>" readonly required>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="matematika_smt4" class="form-label">Matematika</label>
+                                <input type="text" class="form-control" id="matematika_smt4" name="matematika_smt4" value="<?= $detail_sekolah['matematika_smt4']; ?>" readonly required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="data_nilai" class="form-label">Data Nilai Raport SMT V</label>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label for="bhs_indonesia_smt5" class="form-label">Bhs Indonesia</label>
+                                <input type="text" class="form-control" id="bhs_indonesia_smt5" name="bhs_indonesia_smt5" value="<?= $detail_sekolah['bhs_indo_smt5']; ?>" readonly required>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="bhs_inggris_smt5" class="form-label">Bhs Inggris</label>
+                                <input type="text" class="form-control" id="bhs_inggris_smt5" name="bhs_inggris_smt5" value="<?= $detail_sekolah['bhs_inggris_smt5']; ?>" readonly required>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="matematika_smt5" class="form-label">Matematika</label>
+                                <input type="text" class="form-control" id="matematika_smt5" name="matematika_smt5" value="<?= $detail_sekolah['matematika_smt5']; ?>" readonly required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
                         <label for="data_nilai" class="form-label">Data Nilai Ujian Akhir Nasional/EBTANAS</label>
                         <div class="row">
                             <div class="col-lg-4">

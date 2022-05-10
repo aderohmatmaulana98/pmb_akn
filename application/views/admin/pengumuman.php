@@ -11,7 +11,7 @@
             <?= $this->session->flashdata('message');  ?>
             <div class="row">
             <div class="card shadow col-lg-9 mt-2">
-                <div class="col-lg-4 mt-3">
+                <div class="col-lg-6 mt-3">
                     <form action="<?= base_url('admin/pengumuman') ?> " method="POST">
                     <div class="input-group mb-3">
                             <select name="th_ajaran" id="th_ajaran" class="form-control" required>
@@ -77,6 +77,15 @@
                                 <option value="" selected disabled>Pilih prodi</option>
                                 <?php foreach ($prodi as $pr) : ?>
                                     <option value="<?= $pr['id']; ?>"><?= $pr['nama_prodi']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="gelombang" class="form-label">Gelombang</label>
+                            <select class="form-select" name="gelombang" required>
+                                <option value="" selected disabled>Pilih gelombang</option>
+                                <?php foreach ($jadwal as $jd) : ?>
+                                    <option value="<?= $jd['id']; ?>"><?= $jd['gelombang']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

@@ -110,26 +110,26 @@ class Auth extends CI_Controller
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'date_created' => time(),
                 'image' =>  'default.png',
-                'is_active' => 0,
+                'is_active' => 1,
                 'role_id' => 4,
                 'cek_isi' => 0,
                 'id_th_ajaran' => $tahun_ajaran
             ];
 
             //siapkan token
-            $token = base64_encode(openssl_random_pseudo_bytes(32));
-            $user_token = [
-                'email' => $email,
-                'token' => $token,
-                'date_created' => time()
-            ];
+            // $token = base64_encode(openssl_random_pseudo_bytes(32));
+            // $user_token = [
+            //     'email' => $email,
+            //     'token' => $token,
+            //     'date_created' => time()
+            // ];
 
-            $this->db->insert('user_token', $user_token);
+            // $this->db->insert('user_token', $user_token);
             $this->db->insert('user', $data);
-            $this->_sendEmail($token, 'verify', $nama);
+            // $this->_sendEmail($token, 'verify', $nama);
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-			Akun berhasil dibuat, silahkan cek email untuk aktivasi akun!
+			Akun berhasil dibuat!
 		  </div>');
 
             redirect('auth');

@@ -13,7 +13,7 @@
                                 <h5>Profile</h5>
                             </div>
                             <div class="col-lg-6 text-end">
-                                <a href="" class="btn btn-primary">Edit Profile</a>
+                                <a href="<?= base_url('user/edit_profil') ?>" class="btn btn-primary">Edit Profile</a>
                             </div>
                         </div>
                         <hr>
@@ -32,7 +32,7 @@
                             <p><?= $pengguna['email']; ?></p>
                         </div>
                         <div>
-                            <h4>No HP</h4>
+                            <h4>No Whatsapp</h4>
                             <p><?= $pengguna['telepon']; ?></p>
                         </div>
                         <div>

@@ -25,7 +25,7 @@
                     
                 </div>
                 
-                <div class="card shadow mt-5 col-lg-7">
+                <!-- <div class="card shadow mt-5 col-lg-7">
                     <table class="table table-hover">
                         <tr>
                             <th>Nilai Praktek</th>
@@ -38,7 +38,7 @@
                             <td><?= $pengumuman['skor'] ?></td>
                         </tr>
                     </table>
-                </div>
+                </div> -->
             </div>
             <?php else : ?>
             <div class="col-lg-7">

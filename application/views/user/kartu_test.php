@@ -113,17 +113,25 @@
                                         <tr>
                                             <td style="font-size: 9pt; border: 0px;"><b>Hari</b></td>
                                             <td style="font-size: 9pt; border: 0px;">:</td>
-                                            <td style="font-size: 9pt; border: 0px;"><?= nama_hari(date('l', strtotime($kartu_test["tgl_test"])));   ?></td>
+                                            <?php if ($kartu_test['gelombang'] == 'Gelombang 1') : ?>
+                                                <td style="font-size: 9pt; border: 0px;">Selasa</td>
+                                            <?php else : ?>
+                                                <td style="font-size: 9pt; border: 0px;">Senin</td>
+                                            <?php endif; ?>
                                         </tr>
                                         <tr>
                                             <td style="font-size: 9pt; border: 0px;"><b>Tanggal</b></td>
                                             <td style="font-size: 9pt; border: 0px;">:</td>
-                                            <td style="font-size: 9pt; border: 0px;"><?= date('d-m-Y', strtotime($kartu_test["tgl_test"]));   ?></td>
+                                            <?php if ($kartu_test['gelombang'] == 'Gelombang 1') : ?>
+                                                <td style="font-size: 9pt; border: 0px;">14 Juni 2022</td>
+                                            <?php else : ?>
+                                                <td style="font-size: 9pt; border: 0px;">18 Juli 2022</td>
+                                            <?php endif; ?>
                                         </tr>
                                         <tr>
                                             <td style="font-size: 9pt; border: 0px;"><b>Jam</b></td>
                                             <td style="font-size: 9pt; border: 0px;">: </td>
-                                            <td style="font-size: 9pt; border: 0px;"><?= date('H:i', strtotime($kartu_test["tgl_test"])) . ' ' . "WIB";   ?></td>
+                                            <td style="font-size: 9pt; border: 0px;">08:00 s/d selesai</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -134,16 +142,6 @@
                                             <td style="font-size: 9pt; border: 0px;"><b>Lokasi</b></td>
                                             <td style="font-size: 9pt; border: 0px;">:</td>
                                             <td style="font-size: 9pt; border: 0px;">Akademi Komunitas Negeri Seni Dan Budaya Yogyakarta</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="font-size: 9pt; border: 0px;"><b>Ruangan Praktek</b></td>
-                                            <td style="font-size: 9pt; border: 0px;">:</td>
-                                            <td style="font-size: 9pt; border: 0px;"><?= $kartu_test['ruangan_praktek']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="font-size: 9pt; border: 0px;"><b>Ruangan Wawancara</b></td>
-                                            <td style="font-size: 9pt; border: 0px;">:</td>
-                                            <td style="font-size: 9pt; border: 0px;"><?= $kartu_test['ruangan_wawancara']; ?></td>
                                         </tr>
                                     </table>
 
@@ -386,8 +384,78 @@
                                 <td width="2%">: </td>
                                 <td class="" width="64%"><?= $sekolah['tgl_ijazah'] ?></td>
                             </tr>
-                            <tr>
+                            <tr class="mb-5">
                                 <td width="1%" valign="top">10.</td>
+                                <td width="34%" valign="top">Data Nilai Raport SMT III</td>
+                                <td width="2%" valign="top">: </td>
+                                <td class="" width="64%">
+                                    <table border="1">
+                                        <tr align="center">
+                                            <td valign="center" rowspan="3" align="center">Nilai Raport</td>
+                                            <td valign="center" colspan="3" align="center">Mata Pelajaran</td>
+                                        </tr>
+                                        <tr align="center">
+                                            <td>Bhs Indonesia</td>
+                                            <td>Bhs Inggris</td>
+                                            <td>Matematika</td>
+                                        </tr>
+                                        <tr align="center">
+                                            <td><?= $sekolah['bhs_indo_smt3'] ?></td>
+                                            <td><?= $sekolah['bhs_inggris_smt3'] ?></td>
+                                            <td><?= $sekolah['matematika_smt3'] ?></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <br>
+                            <tr class="mb-5">
+                                <td width="1%" valign="top">11.</td>
+                                <td width="34%" valign="top">Data Nilai Raport SMT IV</td>
+                                <td width="2%" valign="top">: </td>
+                                <td class="" width="64%">
+                                    <table border="1">
+                                        <tr align="center">
+                                            <td valign="center" rowspan="3" align="center">Nilai Raport</td>
+                                            <td valign="center" colspan="3" align="center">Mata Pelajaran</td>
+                                        </tr>
+                                        <tr align="center">
+                                            <td>Bhs Indonesia</td>
+                                            <td>Bhs Inggris</td>
+                                            <td>Matematika</td>
+                                        </tr>
+                                        <tr align="center">
+                                            <td><?= $sekolah['bhs_indo_smt4'] ?></td>
+                                            <td><?= $sekolah['bhs_inggris_smt4'] ?></td>
+                                            <td><?= $sekolah['matematika_smt4'] ?></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr class="mb-5">
+                                <td width="1%" valign="top">12.</td>
+                                <td width="34%" valign="top">Data Nilai Raport SMT IV</td>
+                                <td width="2%" valign="top">: </td>
+                                <td class="" width="64%">
+                                    <table border="1">
+                                        <tr align="center">
+                                            <td valign="center" rowspan="3" align="center">Nilai Raport</td>
+                                            <td valign="center" colspan="3" align="center">Mata Pelajaran</td>
+                                        </tr>
+                                        <tr align="center">
+                                            <td>Bhs Indonesia</td>
+                                            <td>Bhs Inggris</td>
+                                            <td>Matematika</td>
+                                        </tr>
+                                        <tr align="center">
+                                            <td><?= $sekolah['bhs_indo_smt5'] ?></td>
+                                            <td><?= $sekolah['bhs_inggris_smt5'] ?></td>
+                                            <td><?= $sekolah['matematika_smt5'] ?></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="1%" valign="top">13.</td>
                                 <td width="34%" valign="top">Data Nilai Ujian Akhir Nasional/EBTANAS</td>
                                 <td width="2%" valign="top">: </td>
                                 <td class="" width="64%">
@@ -410,7 +478,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pt-3" width="1%" valign="top">11.</td>
+                                <td class="pt-3" width="1%" valign="top">14.</td>
                                 <td class="pt-3" width="34%" valign="top">Data Prestasi 3 Tahun Terakhir</td>
                                 <td class="pt-3" width="2%" valign="top">: </td>
                                 <td class="pt-3" width="64%">

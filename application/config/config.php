@@ -23,11 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-<<<<<<< HEAD
-$config['base_url'] = 'http://localhost/lmsakn/';
-=======
 $config['base_url'] = 'http://localhost:8080/lmsakn/';
->>>>>>> a4ec211828a96b2f662f82cf47a6aca8ab147643
 
 /*
 |--------------------------------------------------------------------------

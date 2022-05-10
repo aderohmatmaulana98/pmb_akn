@@ -7,12 +7,18 @@
 	<div class="card shadow">
 		<div>
 		<form action="<?= base_url('admin/cetak_data_calon_mhs') ?>" method="POST">
-		<div class="col-lg-3 p-3">
+		<div class="col-lg-6 p-3">
 			<div class="input-group mb-3">
 				<select name="th_ajaran" id="th_ajaran" class="form-control" required>
 					<option value="" selected disabled>Pilih Tahun Ajaran</option>
 					<?php foreach ($tahun_ajaran as $th) : ?>
 						<option value="<?= $th['id']; ?>"><?= $th['tahun_ajaran']; ?></option>
+					<?php endforeach; ?>
+				</select>
+				<select name="gelombang" id="gelombang" class="form-control" required>
+					<option value="" selected disabled>Pilih Gelombang</option>
+					<?php foreach ($jadwal as $jd) : ?>
+						<option value="<?= $jd['id']; ?>"><?= $jd['gelombang']; ?></option>
 					<?php endforeach; ?>
 				</select>
 				<button type="submit" class="btn btn-primary"><i data-feather="printer" width="20"></i> Cetak</button>

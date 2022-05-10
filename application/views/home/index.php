@@ -105,6 +105,24 @@
                     <li><a href="#alur" target="_blank">Alur</a></li>
                     <li><a href="#kontak" target="_blank">Kontak</a></li>
                 </ul>
+            </li>
+        </ul>
+        <div class="apldg-header-right">
+                        <?php if ($buka == 1) : ?>
+                            <a href="<?= base_url('auth/index'); ?>" class="apldg-primary-btn">Login</a>
+                        <?php else : ?>
+                            <a href="#" class="apldg-primary-btn" onclick="Swal.fire(
+                                                                                    'Perhatian !',
+                                                                                    'Pendaftaran Mahasiswa Baru Belum Dibuka.',
+                                                                                    'warning'
+                                                                                    )" id="login">Login</a>
+                        <?php endif; ?>
+                        <div class="apldg-mobile-menu-open">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
     </div>
 
     <!-- Header Search Form -->
@@ -125,7 +143,7 @@
         <span class="apldg-hero-vector-4"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang3.png" alt=""></span>
         <div class="apldg-hero-slider">
             <div class="apldg-hero-single-item">
-                <span class="apldg-hero-right-img apldg-responsive-vector-img"><img class="rounded" src="<?= base_url('assets/landing/assets/img/akn/baner2.jpg') ?>" alt="banner1"></span>
+                <span class="apldg-hero-right-img apldg-responsive-vector-img"><img class="rounded" src="<?= base_url('assets/landing/assets/img/akn/baner2.JPG') ?>" alt="banner1"></span>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-7 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
@@ -142,7 +160,7 @@
                 </div>
             </div>
             <div class="apldg-hero-single-item">
-                <span class="apldg-hero-right-img apldg-responsive-vector-img"><img class="rounded" src="<?= base_url('assets/landing/assets/img/akn/baner2.jpg') ?>" alt=""></span>
+                <span class="apldg-hero-right-img apldg-responsive-vector-img"><img class="rounded" src="<?= base_url('assets/landing/assets/img/akn/baner2.JPG') ?>" alt=""></span>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-7 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
@@ -206,7 +224,7 @@
                             <div class="col-sm-4">
                                 <div class="apldg-choose-column">
                                     <div class="apldg-icon-wrapper">
-                                        <img src="<?= base_url('assets/landing/assets/img/akn/tari.jpg') ?>">
+                                        <img src="<?= base_url('assets/landing/assets/img/akn/tari.JPG') ?>">
                                     </div>
                                     <div class="apldg-headline">
                                         <a href="#">
@@ -221,7 +239,7 @@
                             <div class="col-sm-4">
                                 <div class="apldg-choose-column">
                                     <div class="apldg-icon-wrapper gradient-2">
-                                        <img src="<?= base_url('assets/landing/assets/img/akn/kriya.jpg') ?>">
+                                        <img src="<?= base_url('assets/landing/assets/img/akn/kriya.JPG') ?>">
                                     </div>
                                     <div class="apldg-headline">
                                         <a href="#">
@@ -295,7 +313,7 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col">Gelombang</th>
+                                                    <th scope="col">Kegiatan</th>
                                                     <th scope="col">Tanggal Buka</th>
                                                     <th scope="col">Tanggal Tutup</th>
                                                 </tr>
@@ -304,14 +322,27 @@
                                                 <tr>
                                                     <th scope="row">1</th>
                                                     <td>Gelombang 1</td>
-                                                    <td>03 Februari 2022</td>
-                                                    <td>06 April 2022</td>
+                                                    <td>09 Mei 2022</td>
+                                                    <td>10 Juni 2022</td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">2</th>
+                                                    <td>Pengumuman Gelombang 1</td>
+                                                    <td colspan="2" class="text-center">30 Juni 2022</td>
+                                                    <td></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th scope="row">3</th>
                                                     <td>Gelombang 2</td>
-                                                    <td>03 Februari 2022</td>
-                                                    <td>06 April 2022</td>
+                                                    <td>04 Juli 2022</td>
+                                                    <td>15 Juli 2022</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">4</th>
+                                                    <td>Pengumuman Gelombang 2</td>
+                                                    <td colspan="2" class="text-center">25 Juli 2022</td>
+                                                    <td></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -370,27 +401,21 @@
                                         <div class="col-lg-12">
                                             <div class="row">
                                                 <img src="<?= base_url('assets/landing/assets/img/akn/icon/whatsapp.png') ?>" style="width: 40px; height: 40px;" alt="" srcset="">
-                                                <p class="mx-2 mt-2">+62 821-3744-7834</p>
+                                                <p class="mx-2 mt-2">081348000045</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 my-3">
                                             <div class="row">
                                                 <img src="<?= base_url('assets/landing/assets/img/akn/icon/email.png') ?>" style="width: 40px; height: 40px;" alt="" srcset="">
-                                                <p class="mx-2 mt-2"> pmb.akn.ac.id</p>
+                                                <p class="mx-2 mt-2">info@aknyogya.ac.id</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6-12 row ml-4 ">
-                                        <div class="col-lg-12">
-                                            <div class="row">
-                                                <img src="<?= base_url('assets/landing/assets/img/akn/icon/telephone.png') ?>" style="width: 40px; height: 40px;" alt="" srcset="">
-                                                <p class="mx-2 mt-2">0274-774289</p>
-                                            </div>
-                                        </div>
                                         <div class="col-lg-12 my-3">
                                             <div class="row">
                                                 <img src="<?= base_url('assets/landing/assets/img/akn/icon/web.png') ?>" style="width: 40px; height: 40px;" alt="" srcset="">
-                                                <p class="mx-2 mt-2"> pmb.akn.ac.id</p>
+                                                <p class="mx-2 mt-2">aknyogya.ac.id</p>
                                             </div>
                                         </div>
                                     </div>
@@ -421,7 +446,7 @@
                         <div class="apldg-title-area">
                             <span class="apldg-subtitle">Alur</span>
                             <div class="apldg-headline">
-                                <h3 style="text-transform: uppercase;">ALUR PENDAFTARAN PMB</h3>
+                                <h3 style="text-transform: uppercase;">PROSEDUR PENDAFTARAN PMB</h3>
                             </div>
                             <div>
                                 <hr style="color: blue; height: 50px;">
@@ -442,22 +467,42 @@
                             <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
                             </div>
                             <div class="card shadow-lg col-lg-10 px-5 py-3">
-                                <p><B>Akademi Komunitas Negeri Seni dan Budaya Yogyakarta tidak memungut biaya pendaftaran pada tahun akademik 2021/2022.</B></p>
+                                <p><B>Akademi Komunitas Negeri Seni dan Budaya Yogyakarta menyelenggarakan seleksi penerimaan mahasiswa baru pada tahun akademik 2022/2023.</B></p>
+                                
+                                <p><b>Persyaratan : </b></p>
+                                <div class="row ml-2">
+                                    <div class="col-lg-12 row">
+                                        <ol>
+                                            <li type="">Fotocopy KTP (Wajib KTP DIY). </li>
+                                            <li>Fotocopy Ijazah dan Nilai Ujian Nasional. </li>
+                                            <li>Fotocopy Nilai Rapot Semester III - V.(Untuk lulusan 2022)  </li>
+                                            <li>Pas foto terbaru ukuran 3x4 background warna merah, 3 lembar</li>
+                                            <li>Surat keterangan sehat badan dari dokter</li>
+                                            <li>Surat Keterangan Bebas Penggunaan NAPZA </li>
+                                            <li>Surat ijin belajar dari pimpinan (bagi yang sudah bekerja)</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                <p><b>Untuk informasi lebih lengkap bisa download file di</b> <a class="text-primary" href="https://drive.google.com/file/d/1Xzzna2VMhLS-MRtAtUgO7b-JWGA3Ihuq/view?usp=sharing">DOWNLOAD FILE</a></p>
+                                
                                 <p><b>Alur Penerimaan Mahasiswa Baru secara online : </b></p>
                                 <div class="row ml-2">
                                     <div class="col-lg-12 row">
                                         <ol>
-                                            <li type="">Calon Mahasiswa melakukan pengisian form registrasi pendaftaran akun</li>
-                                            <li>Login dengan akun yang sudah dibuat</li>
-                                            <li>Mengisi formulir pendaftaran sampai lengkap dan melakukan finalisasi data setelah data lengkap. Pastikan lengkapi data dahulu baru finaslisasi.</li>
-                                            <li>Cetak formulir pendaftaran online</li>
-                                            <li>Kumpulkan berkas/ formulir pendaftaran online yang sudah dicetak beserta kelengkapan berkas pendaftaran ke Kampus Akademi Komunitas Negeri Seni dan Budaya Yogyakarta</li>
-                                            <li>Verifikasi Berkas oleh pertugas</li>
-                                            <li>Pengumuman seleksi</li>
+                                            <li type="">Calon Mahasiswa buat akun di halaman pmb.aknyogya.ac.id</li>
+                                            <li>Calon Mahasiswa melakukan pembayaran sebesar Rp. 200.000,00 datang langsung ke loket pendaftaran.</li>
+                                            <li>Calon mahasiswa memasukan kode transaksi dan mengupload bukti pembayaran.</li>
+                                            <li>Calon mahasiswa mengisi formulir pendaftaran.</li>
+                                            <li>Cetak formulir pendaftaran, kartu test dan surat pernyataan.</li>
+                                            <li>Mengumpulkan formulir dan berkas pendaftaran di loket pendaftaran</li>
+                                            <li>Berkas dikumpulkan dan dimasukan di dalam map berwarna : <br> 
+                                            •	Kuning (Prodi seni tari) <br>
+•	Merah (Prodi seni karawitan) <br>
+•	Biru (Prodi kriya kulit)
+</li>
                                         </ol>
                                     </div>
-                                </div>
-                                <p><b>Untuk informasi lebih lengkap bisa download file di</b> <a class="text-primary" href="https://aknyogya.ac.id/download/get_file/9">DOWNLOAD FILE</a></p>
+                                </div>                                
                             </div>
                             <div class="card-header border-bottom-warning text-right" style="background-color: orange;">
                             </div>
@@ -472,7 +517,7 @@
         </section>
 
         <!-- Testimonial Section -->
-        <section class="apldg-testimonial-section">
+        <!-- <section class="apldg-testimonial-section">
             <span class="apldg-object-16"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/slider/gareng.png" alt=""></span>
             <span class="apldg-object-17"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/wayang2.png" alt=""></span>
             <span class="apldg-circle-shape"><img src="<?= base_url('assets/landing/') ?>assets/img/d-agency2/petruk.png" alt=""></span>
@@ -543,7 +588,7 @@
                 </div>
 
             </div>
-        </section>
+        </section> -->
     </section>
     <!-- Testimonial Section End -->
 
@@ -559,12 +604,12 @@
                                 <font size="3">Akademi Komunitas Negeri Seni Yogyakarta sebagai pusat pengembangan seni yang unggul, handal dan bermartabat dengan berbasis budaya lokal dan berwawasan global.</font>
                             </p>
                         </div>
-                        <div class="apldg-footer-socials">
+                        <!-- <div class="apldg-footer-socials">
                             <a href="#"><i class="fab fa-facebook"></i></a>
                             <a href="#"><i class="fab fa-twitter"></i></a>
                             <a href="#"><i class="fab fa-pinterest"></i></a>
                             <a href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -581,7 +626,7 @@
                                 </li>
                                 <li>
                                     <i class="fas fa-phone"></i>
-                                    <span>0274-774289</span>
+                                    <span>081348000045</span>
                                 </li>
                                 <li>
                                     <i class="fas fa-envelope"></i>

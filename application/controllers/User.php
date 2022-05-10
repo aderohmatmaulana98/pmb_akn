@@ -94,7 +94,7 @@ class User extends CI_Controller
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->library('dompdf_gen');
-        $sql = "SELECT pendaftar.`no_pendaftaran`, pendaftar.`nama_lengkap`, pendaftar.`tempat_lahir`, pendaftar.`tanggal_lahir`, pendaftar.`jenis_kelamin`, prodi.nama_prodi, prodi.ruangan_praktek, prodi.ruangan_wawancara, jadwal.`tgl_test`, pendaftar.pas_foto, th_ajaran.tahun_ajaran
+        $sql = "SELECT pendaftar.`no_pendaftaran`, pendaftar.`nama_lengkap`, pendaftar.`tempat_lahir`, pendaftar.`tanggal_lahir`, pendaftar.`jenis_kelamin`, prodi.nama_prodi, prodi.ruangan_praktek, prodi.ruangan_wawancara, jadwal.`tgl_test`, pendaftar.pas_foto, th_ajaran.tahun_ajaran,jadwal.gelombang
         FROM user, pendaftar, jadwal, prodi, th_ajaran
         WHERE user.`id` = pendaftar.`id_user_calon_mhs`
         AND jadwal.`id` = pendaftar.`id_jadwal`
@@ -357,9 +357,20 @@ class User extends CI_Controller
         $tahun_lulus = $this->input->post('tahun_lulus');
         $no_ijazah = $this->input->post('no_ijazah');
         $tgl_ijazah = $this->input->post('tgl_ijazah');
+
+        $bhs_indonesia_smt3 = $this->input->post('bhs_indonesia_smt3');
+        $bhs_inggris_smt3 = $this->input->post('bhs_inggris_smt3');
+        $matematika_smt3 = $this->input->post('matematika_smt3');
+        $bhs_indonesia_smt4 = $this->input->post('bhs_indonesia_smt4');
+        $bhs_inggris_smt4 = $this->input->post('bhs_inggris_smt4');
+        $matematika_smt4 = $this->input->post('matematika_smt4');
+        $bhs_indonesia_smt5 = $this->input->post('bhs_indonesia_smt5');
+        $bhs_inggris_smt5 = $this->input->post('bhs_inggris_smt5');
+        $matematika_smt5 = $this->input->post('matematika_smt5');
         $bhs_indonesia = $this->input->post('bhs_indonesia');
         $bhs_inggris = $this->input->post('bhs_inggris');
         $matematika = $this->input->post('matematika');
+
         $id_user_calon_mhs = $data['user']['id'];
 
         $data = [
@@ -371,6 +382,15 @@ class User extends CI_Controller
             'tahun_lulus' => $tahun_lulus,
             'no_ijazah' => $no_ijazah,
             'tgl_ijazah' => $tgl_ijazah,
+            'bhs_indo_smt3' => $bhs_indonesia_smt3,
+            'bhs_inggris_smt3' => $bhs_inggris_smt3,
+            'matematika_smt3' => $matematika_smt3,
+            'bhs_indo_smt4' => $bhs_indonesia_smt4,
+            'bhs_inggris_smt4' => $bhs_inggris_smt4,
+            'matematika_smt4' => $matematika_smt4,
+            'bhs_indo_smt5' => $bhs_indonesia_smt5,
+            'bhs_inggris_smt5' => $bhs_inggris_smt5,
+            'matematika_smt5' => $matematika_smt5,
             'bhs_indonesia' => $bhs_indonesia,
             'bhs_inggris' => $bhs_inggris,
             'matematika' => $matematika,
@@ -465,7 +485,7 @@ class User extends CI_Controller
         $this->db->query($sql1);
 
         $sql2 = "SELECT pendaftar.id 
-        FROM USER, pendaftar
+        FROM user, pendaftar
         WHERE user.`id` = pendaftar.`id_user_calon_mhs`
         AND user.`id` = $id_user_calon_mhs";
 
@@ -691,7 +711,7 @@ class User extends CI_Controller
         WHERE user.nik = $id";
         $data['detail_form'] = $this->db->query($sql)->row_array();
 
-        $sql1 = "SELECT user.id,detail_sekolah.`nama_sekolah`, detail_sekolah.`jenis_sekolah`, detail_sekolah.`id_provinsi`, detail_sekolah.`alamat_lengkap_sekolah`, detail_sekolah.`jurusan`, detail_sekolah.`status_kelulusan`, detail_sekolah.`tahun_lulus`, detail_sekolah.`no_ijazah`, detail_sekolah.`tgl_ijazah`, detail_sekolah.`bhs_indonesia`, detail_sekolah.`bhs_inggris`, detail_sekolah.`matematika`, provinsi.`nama_provinsi`
+        $sql1 = "SELECT user.id,detail_sekolah.`nama_sekolah`, detail_sekolah.`jenis_sekolah`, detail_sekolah.`id_provinsi`, detail_sekolah.`alamat_lengkap_sekolah`, detail_sekolah.`jurusan`, detail_sekolah.`status_kelulusan`, detail_sekolah.`tahun_lulus`, detail_sekolah.`no_ijazah`, detail_sekolah.`tgl_ijazah`,detail_sekolah.`bhs_indo_smt3`, detail_sekolah.`bhs_inggris_smt3`, detail_sekolah.`matematika_smt3`,detail_sekolah.`bhs_indo_smt4`, detail_sekolah.`bhs_inggris_smt4`, detail_sekolah.`matematika_smt4`,detail_sekolah.`bhs_indo_smt5`, detail_sekolah.`bhs_inggris_smt5`, detail_sekolah.`matematika_smt5` ,detail_sekolah.`bhs_indonesia`, detail_sekolah.`bhs_inggris`, detail_sekolah.`matematika`, provinsi.`nama_provinsi`
         FROM detail_sekolah, user, provinsi
         WHERE detail_sekolah.`id_user_calon_mhs` = user.`id`
         AND provinsi.`id` = detail_sekolah.`id_provinsi`
@@ -783,10 +803,78 @@ class User extends CI_Controller
         $data['title'] = 'Tunggu';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
+        if ($data['user']['status_bayar'] == 1) {
+            redirect('user/formulir');
+        }
+
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar', $data);
         $this->load->view('template/topbar', $data);
         $this->load->view('user/tunggu', $data);
         $this->load->view('template/footer');
+    }
+    public function edit_profil()
+    {
+        $data['title'] = 'Edit Profil';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $id_user =  $data['user']['id'];
+        $data['profil'] = $this->db->query("SELECT * FROM user, pendaftar WHERE user.id = pendaftar.id_user_calon_mhs")->row_array();
+
+        $this->form_validation->set_rules('nik', 'NIK', 'required|trim');
+        $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required|trim');
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+        $this->form_validation->set_rules('no_wa', 'Nomor Whatsapp', 'required|trim');
+        $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required|trim');
+        $this->form_validation->set_rules('tanggal_lahir', 'Tanggal Lahir', 'required|trim');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('template/header', $data);
+            $this->load->view('template/sidebar', $data);
+            $this->load->view('template/topbar', $data);
+            $this->load->view('user/edit_profil', $data);
+            $this->load->view('template/footer');
+        } else {
+            $nik = $this->input->post('nik');
+            $nama_lengkap = $this->input->post('nama_lengkap');
+            $email = $this->input->post('email');
+            $no_wa = $this->input->post('no_wa');
+            $tempat_lahir = $this->input->post('tempat_lahir');
+            $tanggal_lahir = $this->input->post('tanggal_lahir');
+            $alamat = $this->input->post('alamat');
+
+            $upload_image = $_FILES['foto']['name'];
+
+            if ($upload_image) {
+                $config['upload_path']          = './assets/admin_panel/assets/images/avatar';
+                $config['allowed_types']        = 'gif|jpg|png';
+                $config['max_size']             = 2048;
+
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('foto')) {
+                    $old_image = $data['user']['image'];
+                    if ($old_image != 'default.png') {
+                        unlink(FCPATH, './assets/admin_panel/assets/images/avatar/' . $old_image);
+                    }
+
+                    $new_image = $this->upload->data('file_name');
+                    $this->db->query("UPDATE user SET user.image = '$new_image' WHERE user.id = $id_user");
+                } else {
+                    die;
+                }
+            }
+
+            $this->db->query("UPDATE user, pendaftar
+            SET user.nik = $nik, pendaftar.nama_lengkap = '$nama_lengkap', pendaftar.tempat_lahir = '$tempat_lahir', 
+            user.no_whatsapp = '$no_wa', pendaftar.tanggal_lahir = '$tanggal_lahir', 
+            user.email='$email', pendaftar.alamat = '$alamat'
+            WHERE user.id = pendaftar.id_user_calon_mhs
+            AND user.id = $id_user");
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			Profile berhasil di ubah!
+		  </div>');
+            redirect('user/my_profil');
+        }
     }
 }
